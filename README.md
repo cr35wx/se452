@@ -12,7 +12,7 @@ This is code associated with DePaul SE452 group project for ticket sales progr
 | Mohammed Sufyan Khan, Osmani |      |        |
 | Pradhyum, Patel |      |        |
 | Rolando, Cuba | Database(s) |        |
-| Suhwan, Kim | Marketing and communication |        |
+| Suhwan, Kim | Marketing and communication | Hi-yo Silver! |
 | William, Berthouex | Backend components |        |
 
 ## Conflict Resolution
