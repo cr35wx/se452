@@ -9,8 +9,8 @@ This is code associated with DePaul SE452 group project for ticket sales progr
 
 | Member | Area | Saying |
 | ------ | ---- | ------ |
-| Mohammed Sufyan Khan, Osmani |      |        |
-| Pradhyum, Patel |      |        |
+| Mohammed Sufyan Khan, Osmani | Event management for organizers |        |
+| Pradhyum, Patel | User Interface |        |
 | Rolando, Cuba | Database(s) |        |
 | Suhwan, Kim | Marketing and communication | Hi-yo Silver! |
 | William, Berthouex | Backend components |        |
