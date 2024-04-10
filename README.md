@@ -11,9 +11,9 @@ This is code associated with DePaul SE452 group project for ticket sales progr
 | ------ | ---- | ------ |
 | Mohammed Sufyan Khan, Osmani |      |        |
 | Pradhyum, Patel |      |        |
-| Rolando, Cuba |      |        |
-| Suhwan, Kim |      |        |
-| William, Berthouex |      |        |
+| Rolando, Cuba | Database(s) |        |
+| Suhwan, Kim | Marketing and communication |        |
+| William, Berthouex | Backend components |        |
 
 ## Conflict Resolution
 
