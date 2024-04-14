@@ -30,4 +30,29 @@ public class EmailServiceTests {
 
         verify(emailService, times(1)).sendEmail(any(Email.class));
     }
+
+    @Test
+    public void testsendOnSaleNotificationEmail() {
+        EmailService emailService = mock(EmailService.class);
+        OnSaleNotificationService onSaleNotificationService = new OnSaleNotificationService(emailService);
+
+        String recipient = "test@example.com";
+        String eventName = "Test Event";
+        onSaleNotificationService.sendOnSaleNotificationEmail(recipient, eventName);
+
+        verify(emailService, times(1)).sendEmail(any(Email.class));
+    }
+    
+    @Test
+    public void testsendEventChangeNotificationEmail() {
+        EmailService emailService = mock(EmailService.class);
+        EventChangeNotificationService eventChangeNotificationService = new EventChangeNotificationService(emailService);
+
+        String recipient = "test@example.com";
+        String eventName = "Test Event";
+        LocalDateTime eventDateTime = LocalDateTime.now().plusDays(1);
+        eventChangeNotificationService.sendEventChangeNotificationEmail(recipient, eventName, eventDateTime);
+
+        verify(emailService, times(1)).sendEmail(any(Email.class));
+    }
 }
