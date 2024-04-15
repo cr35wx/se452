@@ -1,0 +1,15 @@
+.login-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh; /* Adjust as needed */
+}
+
+.login-card {
+    width: 300px; /* Adjust width as needed */
+    padding: 20px;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}

@@ -1,0 +1,24 @@
+<div class="card-container">
+@for (item of items; track item.title) {
+  <mat-card class="example-card">
+    <mat-card-header>
+      <mat-card-title>{{ item.title }}</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <p>{{ item.description }}</p>
+      <button mat-raised-button color="primary" class="buy-button">Buy</button>
+      <div class="arrow-container">
+        <button mat-icon-button (click)="decrementIndex()">
+          <mat-icon>arrow_upward</mat-icon>
+        </button>
+        <span>{{ currentIndex + 1 }}</span>
+        <button mat-icon-button (click)="incrementIndex()">
+          <mat-icon>arrow_downward</mat-icon>
+        </button>
+      </div>
+    </mat-card-content>
+  </mat-card>
+  } @empty {
+  <li>There are no items.</li>
+  }
+  </div>
