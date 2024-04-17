@@ -1,0 +1,18 @@
+package edu.depaul.ticketselling.service;
+
+import edu.depaul.ticketselling.model.Ticket;
+import edu.depaul.ticketselling.repository.TicketRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+@Service
+public class TicketService {
+    private final TicketRepository ticketRepository;
+
+    @Autowired
+    public TicketService(TicketRepository ticketRepository) {
+        this.ticketRepository = ticketRepository;
+    }
+
+    // Implement ticket-related methods
+}

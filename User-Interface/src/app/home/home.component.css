@@ -1,0 +1,40 @@
+.card-container {
+  display: flex;
+  flex-direction: column; /* Stack cards vertically */
+  align-items: center; /* Center cards horizontally */
+  overflow-y: auto; /* Enable vertical scrolling if necessary */
+}
+
+.example-card {
+  width: 700px; 
+  height: 150px; 
+  margin-bottom: 20px; 
+}
+
+/* Adjust the last card's margin to remove extra space */
+.example-card:last-child {
+  margin-bottom: 0;
+}
+.arrow-container {
+  display: flex;
+  align-items: center;
+}
+
+.arrow-container button {
+  margin-right: 8px; /* Adjust margin as needed */
+}
+
+.arrow-container span {
+  margin: 0 8px; /* Adjust margin as needed */
+}
+.example-card {
+  display: flex;
+  flex-direction: column;
+}
+
+.button-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+

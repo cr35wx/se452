@@ -1,0 +1,19 @@
+package edu.depaul.ticketselling.model;
+
+import lombok.Data;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.relational.core.mapping.Table;
+
+import java.math.BigDecimal;
+
+@Data
+@Table("tickets")
+public class Ticket {
+    @Id
+    private Long id;
+    private Long eventId; // Foreign key to Event
+    private String guestId;
+    private BigDecimal price;
+    private String seatNumber;
+    // Other ticket-related fields
+}
