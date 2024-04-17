@@ -22,10 +22,10 @@ public class TicketsellingApplication {
 	@Bean
 	CommandLineRunner runner() {
 		return args -> {
-			var test = new TestModel("hey", "john doe", 5);
-			testModelService.save(test);
-			List<TestModel> bro = testModelService.findAll();
-			System.out.println(bro);
+			// var test = new TestModel("hey", "john doe", 5);
+			// testModelService.save(test);
+			// List<TestModel> bro = testModelService.findAll();
+			// System.out.println(bro);
 		};
 	}
 }
