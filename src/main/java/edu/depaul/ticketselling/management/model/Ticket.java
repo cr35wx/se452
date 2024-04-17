@@ -1,15 +1,16 @@
-package edu.depaul.ticketselling.model;
+package edu.depaul.ticketselling.management.model;
 
+import jakarta.persistence.*;
 import lombok.Data;
-import org.springframework.data.annotation.Id;
-import org.springframework.data.relational.core.mapping.Table;
 
 import java.math.BigDecimal;
 
+@Entity
 @Data
-@Table("tickets")
+@Table(name = "tickets")
 public class Ticket {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private Long eventId; // Foreign key to Event
     private String guestId;
