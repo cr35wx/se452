@@ -3,6 +3,10 @@
 target/
 node_modules/
 build/
+.classpath
+.factorypath
+.project
+.settings/
 
 coverage/
 
