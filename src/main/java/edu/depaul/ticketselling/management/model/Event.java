@@ -5,13 +5,17 @@ import jakarta.persistence.Id;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Table;
-import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
 
 import java.time.LocalDate;
 
 @Entity
-@Data
 @Table(name = "events")
+@Getter
+@Setter
+@ToString
 public class Event {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -19,5 +23,14 @@ public class Event {
     private String eventName;
     private LocalDate eventDate;
     // Other event-related fields
+
+    public Event() {
+
+    }
+
+    public Event(String eventName, LocalDate eventDate) {
+        this.eventName = eventName;
+        this.eventDate = eventDate;
+    }
 }
 
