@@ -1,6 +1,7 @@
 package edu.depaul.ticketselling.backend;
 
 import org.springframework.data.annotation.Id;
+import org.springframework.data.relational.core.mapping.Table;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -13,6 +14,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @Builder
+@Table("venues")
 public class Venue {
     @Id
     private long venueId;

@@ -1,11 +1,11 @@
 package edu.depaul.ticketselling.backend;
 
 import org.springframework.data.annotation.Id;
+import org.springframework.data.relational.core.mapping.Table;
 
 import lombok.AllArgsConstructor;
-import lombok.Getter;
+import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 
 /**
  * Defines a general customer with no special permissions.
@@ -13,8 +13,8 @@ import lombok.Setter;
  */
 @AllArgsConstructor
 @NoArgsConstructor
-@Getter
-@Setter
+@Data
+@Table("customers")
 public class Customer implements User {
     @Id
     private long userId;
