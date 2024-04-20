@@ -1,4 +1,4 @@
 ## Ignore Intellij settings file
 .idea/
-
-
+## Ignore class files
+*.class

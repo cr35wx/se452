@@ -1,5 +1,7 @@
 package edu.depaul.ticketselling.backend;
 
+import java.time.LocalDateTime;
+
 import org.springframework.data.annotation.Id;
 import org.springframework.data.relational.core.mapping.Table;
 
@@ -15,12 +17,16 @@ import lombok.NoArgsConstructor;
 @Data
 @Table("admins")
 public class Admin implements User {
-    @Id
-    private long userId;
+    @Id private long userId;
     private String username;
     private String password;
     private String emailAddress;
+    private String phoneNumber;
+    private LocalDateTime creationDate;
 
-    // TODO implement purchase history
+    @Override
+    public String toString() {
+        return String.format("Administrator %s, User ID: %d%nEmail: %s%nPhone: %s", username, userId, emailAddress, phoneNumber);
+    }
 
 }
