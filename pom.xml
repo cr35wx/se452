@@ -46,6 +46,17 @@
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
 		</dependency>
+		
+		<!-- Dependency for e-Mail Service @Auther Suhwan Kim-->
+		<dependency>
+    			<groupId>org.springframework.boot</groupId>
+   			<artifactId>spring-boot-starter-mail</artifactId>
+		</dependency>
+		<dependency>
+    			<groupId>com.sun.mail</groupId>
+    			<artifactId>jakarta.mail</artifactId>
+    			<version>1.6.5</version>
+		</dependency>
 	</dependencies>
 
 	<build>
