@@ -58,9 +58,9 @@ public class TicketsellingApplication {
 
 			List<Event> events = List.of(
 					// generic names
-					new Event("Concert", LocalDate.of(2024, 5, 15)),
-					new Event("Sports Event", LocalDate.of(2024, 6, 20)),
-					new Event("Conference", LocalDate.of(2024, 7, 25))
+					new Event(1L, "Concert", LocalDate.of(2024, 5, 15)),
+					new Event(2L, "Sports Event", LocalDate.of(2024, 6, 20)),
+					new Event(3L, "Conference", LocalDate.of(2024, 7, 25))
 			);
 
 			System.out.println("Newly created events:");

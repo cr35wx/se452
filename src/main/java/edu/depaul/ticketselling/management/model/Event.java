@@ -28,7 +28,8 @@ public class Event {
 
     }
 
-    public Event(String eventName, LocalDate eventDate) {
+    public Event(long id, String eventName, LocalDate eventDate) {
+        this.id = id;
         this.eventName = eventName;
         this.eventDate = eventDate;
     }

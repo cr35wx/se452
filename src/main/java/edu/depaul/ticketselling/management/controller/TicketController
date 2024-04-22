@@ -1,0 +1,32 @@
+package edu.depaul.ticketselling.controller;
+
+import edu.depaul.ticketselling.management.model.Ticket;
+import edu.depaul.ticketselling.management.service.TicketService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+
+@RestController
+@RequestMapping("/tickets")
+public class TicketController {
+
+    private final TicketService ticketService;
+
+    @Autowired
+    public TicketController(TicketService ticketService) {
+        this.ticketService = ticketService;
+    }
+
+    @GetMapping
+    public List<Ticket> getAllTickets() {
+        return ticketService.findAll();
+    }
+
+    @GetMapping("/{eventId}")
+    public List<Ticket> getTicketsByEventId(@PathVariable Long eventId) {
+        return ticketService.findTicketsByEventId(eventId);
+    }
+
+    // Add more endpoints as needed
+}
