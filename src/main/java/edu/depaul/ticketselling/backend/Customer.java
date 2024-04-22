@@ -5,20 +5,22 @@ import java.time.LocalDateTime;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.relational.core.mapping.Table;
 
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 /**
  * Defines a general customer with no special permissions.
- * Can purchase {@link Ticket}s
+ * Can purchase {@link Ticket}s.
  */
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
 @Table("accounts")
 public class Customer implements User {
-    @Id private long userId;
+    @Id @GeneratedValue(strategy= GenerationType.AUTO) private long userId;
     private String username;
     private String password;
     private String emailAddress;

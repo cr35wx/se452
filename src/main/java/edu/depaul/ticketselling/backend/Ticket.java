@@ -5,6 +5,8 @@ import java.time.LocalDateTime;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.relational.core.mapping.Table;
 
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import lombok.Builder;
 import lombok.Data;
 
@@ -18,7 +20,7 @@ import lombok.Data;
 @Builder
 @Table("tickets")
 public class Ticket {
-    @Id private long ticketId;
+    @Id @GeneratedValue(strategy= GenerationType.AUTO) private long ticketId;
     private int price;
     private int seatNumber;
     private Event event;
