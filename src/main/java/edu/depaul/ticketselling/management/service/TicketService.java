@@ -20,14 +20,12 @@ public class TicketService {
         return ticketRepository.findAll();
     }
 
-    public List<Ticket> findTicketsByEventId(Long eventId) {
-        return ticketRepository.findTicketsByEventId(eventId);
+    public Ticket save(Ticket ticket) {
+        return ticketRepository.save(ticket);
+    }
+    public List<Ticket> saveAll(List<Ticket> tickets) {
+        return ticketRepository.saveAll(tickets);
     }
 
-    public void saveAll(List<Ticket> tickets) {
-        ticketRepository.saveAll(tickets);
-    }
-
-    // Implement ticket-related methods
 }
 
