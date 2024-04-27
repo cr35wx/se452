@@ -3,6 +3,8 @@ package edu.depaul.ticketselling.backend;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.relational.core.mapping.Table;
 
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -16,7 +18,7 @@ import lombok.Setter;
 @Builder
 @Table("venues")
 public class Venue {
-    @Id private long venueId;
+    @Id @GeneratedValue(strategy= GenerationType.AUTO) private long venueId;
     private String venueName;
     private Address address;
     private long seatingCapacity;

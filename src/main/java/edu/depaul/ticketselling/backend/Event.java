@@ -7,6 +7,8 @@ import java.time.LocalTime;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.relational.core.mapping.Table;
 
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import lombok.Builder;
 import lombok.Data;
 
@@ -17,7 +19,7 @@ import lombok.Data;
 @Builder
 @Table("events")
 public class Event {
-    @Id private long eventId;
+    @Id @GeneratedValue(strategy= GenerationType.AUTO) private long eventId;
     private String eventName;
     private String artist;
     private LocalDateTime dateTime;
