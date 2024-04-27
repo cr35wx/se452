@@ -1,4 +1,4 @@
-package edu.depaul.ticketselling.marketing;
+package edu.depaul.ticketselling.marketing.service;
 
 /**
  * [Marketing and communication]

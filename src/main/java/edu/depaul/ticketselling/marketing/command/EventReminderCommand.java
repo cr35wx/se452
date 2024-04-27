@@ -1,6 +1,9 @@
-package edu.depaul.ticketselling.marketing;
+package edu.depaul.ticketselling.marketing.command;
 
 import java.time.LocalDateTime;
+
+import edu.depaul.ticketselling.marketing.service.Email;
+import edu.depaul.ticketselling.marketing.service.EmailService;
 
 /**
  * [Marketing and communication]
@@ -10,14 +13,15 @@ import java.time.LocalDateTime;
  * 
  * @author Suhwan Kim
  */
-public class EventReminderService {
+
+public class EventReminderCommand {
     private EmailService emailService;
 
-    public EventReminderService(EmailService emailService) {
+    public EventReminderCommand(EmailService emailService) {
         this.emailService = emailService;
     }
 
-    public void sendEventReminderEmail(String recipient, String eventName, LocalDateTime eventDateTime) {
+    public void execute(String recipient, String eventName, LocalDateTime eventDateTime) {
         String subject = "Event Reminder";
         String body = "Reminder: You have an upcoming event " + eventName + " on " + eventDateTime.toString();
         Email email = Email.builder()

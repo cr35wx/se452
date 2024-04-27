@@ -1,21 +1,16 @@
-package edu.depaul.ticketselling.marketing;
+package edu.depaul.ticketselling.marketing.command;
 
-/**
- * [Marketing and communication]
- * This code is the skeleton of the E-mail marketing service.
- * 
- * Order confirmations
- * 
- * @author Suhwan Kim
- */
-public class OrderConfirmationService {
+import edu.depaul.ticketselling.marketing.service.Email;
+import edu.depaul.ticketselling.marketing.service.EmailService;
+
+public class OrderConfirmationCommand {
     private EmailService emailService;
 
-    public OrderConfirmationService(EmailService emailService) {
+    public OrderConfirmationCommand(EmailService emailService) {
         this.emailService = emailService;
     }
 
-    public void sendOrderConfirmationEmail(String recipient, String eventName) {
+    public void execute(String recipient, String eventName) {
         String subject = "Order Confirmation";
         String body = "Thank you for purchasing tickets. Your Order : " + eventName;
         Email email = Email.builder()

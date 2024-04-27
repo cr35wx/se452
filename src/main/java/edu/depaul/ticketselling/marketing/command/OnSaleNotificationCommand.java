@@ -1,4 +1,7 @@
-package edu.depaul.ticketselling.marketing;
+package edu.depaul.ticketselling.marketing.command;
+
+import edu.depaul.ticketselling.marketing.service.Email;
+import edu.depaul.ticketselling.marketing.service.EmailService;
 
 /**
  * [Marketing and communication]
@@ -8,14 +11,14 @@ package edu.depaul.ticketselling.marketing;
  * 
  * @author Suhwan Kim
  */
-public class OnSaleNotificationService {
+public class OnSaleNotificationCommand {
     private EmailService emailService;
 
-    public OnSaleNotificationService(EmailService emailService) {
+    public OnSaleNotificationCommand(EmailService emailService) {
         this.emailService = emailService;
     }
 
-    public void sendOnSaleNotificationEmail(String recipient, String eventName) {
+    public void execute(String recipient, String eventName) {
         String subject = "New Event On Sale";
         String body = "Good news! Tickets for " + eventName + " are now on sale.";
         Email email = Email.builder()

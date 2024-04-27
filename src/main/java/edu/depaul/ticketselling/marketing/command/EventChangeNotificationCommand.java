@@ -1,6 +1,9 @@
-package edu.depaul.ticketselling.marketing;
+package edu.depaul.ticketselling.marketing.command;
 
 import java.time.LocalDateTime;
+
+import edu.depaul.ticketselling.marketing.service.Email;
+import edu.depaul.ticketselling.marketing.service.EmailService;
 
 /**
  * [Marketing and communication]
@@ -10,14 +13,15 @@ import java.time.LocalDateTime;
  * 
  * @author Suhwan Kim
  */
-public class EventChangeNotificationService {
+
+public class EventChangeNotificationCommand {
     private EmailService emailService;
 
-    public EventChangeNotificationService(EmailService emailService) {
+    public EventChangeNotificationCommand(EmailService emailService) {
         this.emailService = emailService;
     }
 
-    public void sendEventChangeNotificationEmail(String recipient, String eventName, LocalDateTime newEventDateTime) {
+    public void execute(String recipient, String eventName, LocalDateTime newEventDateTime) {
         String subject = "Event Change Notification";
         String body = "Please be informed that there has been a change in the schedule for " + eventName + ". The new date and time is " + newEventDateTime.toString();
         Email email = Email.builder()

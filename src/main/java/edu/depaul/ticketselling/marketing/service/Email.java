@@ -1,4 +1,4 @@
-package edu.depaul.ticketselling.marketing;
+package edu.depaul.ticketselling.marketing.service;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -17,6 +17,7 @@ import lombok.NoArgsConstructor;
  @AllArgsConstructor
  @Builder
  public class Email {
+    
      private String recipient;
      private String subject;
      private String body;
