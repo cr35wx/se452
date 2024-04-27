@@ -2,11 +2,11 @@ package edu.depaul.ticketselling.backend;
 
 import java.time.LocalDateTime;
 
-import org.springframework.data.annotation.Id;
 import org.springframework.data.relational.core.mapping.Table;
 
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
 import lombok.Builder;
 import lombok.Data;
 
@@ -37,6 +37,18 @@ public class Ticket {
      */
     public Venue getEventVenue() {
         return event.getVenue();
+    }
+
+    public String getEventName() {
+        return event.getEventName();
+    }
+
+    public String getArtist() {
+        return event.getArtist();
+    }
+
+    public String getVenueName() {
+        return getEventVenue().getVenueName();
     }
 
     @Override
