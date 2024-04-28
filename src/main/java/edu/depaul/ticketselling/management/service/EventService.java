@@ -24,16 +24,15 @@ public class EventService {
                 .collect(Collectors.toList());
     }
 
-    public List<Event> findEventsByEventDate(LocalDate eventDate) {
-        return eventRepository.findEventsByEventDate(eventDate);
+    public Event findByName(String name) {
+        return eventRepository.findByName(name);
     }
 
-    public Event findByEventName(String eventName) {
-        return eventRepository.findByEventName(eventName);
+    public Event save(Event event) {
+        return eventRepository.save(event);
     }
-
-    public void saveAll(List<Event> events) {
-        eventRepository.saveAll(events);
+    public List<Event> saveAll(List<Event> events) {
+        return eventRepository.saveAll(events);
     }
 
     // Other methods for event management
