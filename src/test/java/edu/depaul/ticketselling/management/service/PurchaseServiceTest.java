@@ -35,7 +35,7 @@ public class PurchaseServiceTest {
         when(purchaseRepository.findAll()).thenReturn(purchases);
 
         // When
-        List<Purchase> result = purchaseService.getAllPurchases();
+        List<Purchase> result = purchaseService.findAll();
 
         // Then
         assertEquals(purchases.size(), result.size());

@@ -24,6 +24,7 @@ public class AccountServiceTest {
     @InjectMocks
     private AccountService accountService;
 
+    @SuppressWarnings("deprecation")
     @BeforeEach
     public void setUp() {
         MockitoAnnotations.initMocks(this);

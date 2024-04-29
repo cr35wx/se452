@@ -1,5 +1,6 @@
 package edu.depaul.ticketselling.management.service;
 
+import edu.depaul.ticketselling.management.interfaces.IAccountService;
 import edu.depaul.ticketselling.management.model.Account;
 import edu.depaul.ticketselling.management.repository.AccountRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,7 +10,7 @@ import java.util.List;
 import java.util.NoSuchElementException;
 
 @Service
-public class AccountService {
+public class AccountService implements IAccountService {
     private final AccountRepository accountRepository;
 
     @Autowired

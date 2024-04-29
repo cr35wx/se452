@@ -1,5 +1,6 @@
 package edu.depaul.ticketselling.management.service;
 
+import edu.depaul.ticketselling.management.interfaces.IPurchaseService;
 import edu.depaul.ticketselling.management.model.Purchase;
 import edu.depaul.ticketselling.management.repository.PurchaseRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,7 +13,7 @@ import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
 
 @Service
-public class PurchaseService {
+public class PurchaseService implements IPurchaseService {
 
     private final PurchaseRepository purchaseRepository;
 

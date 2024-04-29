@@ -1,5 +1,6 @@
 package edu.depaul.ticketselling.management.service;
 
+import edu.depaul.ticketselling.management.interfaces.ITicketService;
 import edu.depaul.ticketselling.management.model.Event;
 import edu.depaul.ticketselling.management.model.Purchase;
 import edu.depaul.ticketselling.management.model.Ticket;
@@ -11,7 +12,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-public class TicketService {
+public class TicketService implements ITicketService {
     private final TicketRepository ticketRepository;
 
     @Autowired

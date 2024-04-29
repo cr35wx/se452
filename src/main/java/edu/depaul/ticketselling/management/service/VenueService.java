@@ -1,5 +1,6 @@
 package edu.depaul.ticketselling.management.service;
 
+import edu.depaul.ticketselling.management.interfaces.IVenueService;
 import edu.depaul.ticketselling.management.model.Venue;
 import edu.depaul.ticketselling.management.repository.VenueRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,7 +11,7 @@ import java.util.NoSuchElementException;
 import java.util.Optional;
 
 @Service
-public class VenueService {
+public class VenueService implements IVenueService {
     private final VenueRepository venueRepository;
 
     @Autowired

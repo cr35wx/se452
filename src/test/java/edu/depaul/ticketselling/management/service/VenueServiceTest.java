@@ -24,6 +24,7 @@ public class VenueServiceTest {
     @InjectMocks
     private VenueService venueService;
 
+    @SuppressWarnings("deprecation")
     @BeforeEach
     public void setUp() {
         MockitoAnnotations.initMocks(this);
