@@ -8,6 +8,7 @@ import lombok.ToString;
 @Entity
 @Table(name = "venues")
 @Getter
+@Setter
 @ToString
 public class Venue {
 
@@ -25,7 +26,7 @@ public class Venue {
     private String email;
 
     @Column(nullable = false)
-    private int capacity;
+    private Integer capacity;
 
     @Column(nullable = false, length = 100)
     private String addressLine1;
