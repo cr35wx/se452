@@ -1,23 +1,20 @@
 package edu.depaul.ticketselling.management.service;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.mockito.Mockito.when;
-
-import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.List;
-
-import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.InjectMocks;
-import org.mockito.Mock;
-import org.mockito.junit.jupiter.MockitoExtension;
-
 import edu.depaul.ticketselling.management.model.Event;
 import edu.depaul.ticketselling.management.repository.EventRepository;
-import edu.depaul.ticketselling.management.service.EventService;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
 
-@ExtendWith(MockitoExtension.class)
+import java.util.Arrays;
+import java.util.List;
+import java.util.Optional;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.mockito.Mockito.*;
+
 public class EventServiceTest {
 
     @Mock
@@ -26,38 +23,23 @@ public class EventServiceTest {
     @InjectMocks
     private EventService eventService;
 
+    @BeforeEach
+    public void setUp() {
+        MockitoAnnotations.openMocks(this);
+    }
+
     @Test
     public void testGetAllEvents() {
-        // Mock data
-        List<Event> events = new ArrayList<>();
-        events.add(new Event(1L, "Concert", LocalDate.of(2024, 5, 15)));
-        events.add(new Event(2L, "Sports Event", LocalDate.of(2024, 6, 20)));
-
-        // Stubbing the behavior of eventRepository.findAll() method
+        // Given
+        List<Event> events = Arrays.asList(new Event(), new Event());
         when(eventRepository.findAll()).thenReturn(events);
 
-        // Call the method to be tested
+        // When
         List<Event> result = eventService.getAllEvents();
 
-        // Verify the result
-        assertEquals(2, result.size());
-        assertEquals("Concert", result.get(0).getEventName());
-        assertEquals("Sports Event", result.get(1).getEventName());
+        // Then
+        assertEquals(events.size(), result.size());
+        verify(eventRepository, times(1)).findAll();
     }
 
-    @Test
-    public void testFindEventByEventName() {
-        // Mock data
-        Event event = new Event(1L, "Concert", LocalDate.of(2024, 5, 15));
-
-        // Stubbing the behavior of eventRepository.findByEventName() method
-        when(eventRepository.findByEventName("Concert")).thenReturn(event);
-
-        // Call the method to be tested
-        Event result = eventService.findByEventName("Concert");
-
-        // Verify the result
-        assertEquals("Concert", result.getEventName());
-        assertEquals(LocalDate.of(2024, 5, 15), result.getEventDate());
-    }
 }

@@ -21,11 +21,25 @@ public class TicketController {
     @GetMapping
     public List<Ticket> getAllTickets() {
         return ticketService.findAll();
+        return new ResponseEntity<>(tickets, HttpStatus.OK);
     }
 
     @GetMapping("/{eventId}")
     public List<Ticket> getTicketsByEventId(@PathVariable Long eventId) {
         return ticketService.findTicketsByEventId(eventId);
+        return new ResponseEntity<>(ticket, HttpStatus.OK);
+    }
+
+    @PostMapping("/purchase")
+    public ResponseEntity<Ticket> purchaseTicket(@RequestBody Ticket ticket) {
+        Ticket purchasedTicket = ticketService.save(ticket);
+        return new ResponseEntity<>(purchasedTicket, HttpStatus.CREATED);
+    }
+
+    @PostMapping("/cancel/{id}")
+    public ResponseEntity<Void> deleteTicket(@PathVariable Long id) {
+        ticketService.cancelTicket(id);
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
     // Add more endpoints as needed

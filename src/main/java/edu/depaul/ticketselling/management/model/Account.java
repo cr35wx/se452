@@ -2,6 +2,7 @@ package edu.depaul.ticketselling.management.model;
 
 import jakarta.persistence.*;
 import lombok.Getter;
+import lombok.Setter;
 import lombok.ToString;
 
 import java.time.LocalDate;
@@ -9,6 +10,7 @@ import java.time.LocalDate;
 @Entity
 @Table(name = "accounts")
 @Getter
+@Setter
 @ToString
 public class Account {
 

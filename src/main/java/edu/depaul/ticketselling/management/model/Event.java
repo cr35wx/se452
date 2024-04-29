@@ -2,6 +2,7 @@ package edu.depaul.ticketselling.management.model;
 
 import jakarta.persistence.*;
 import lombok.Getter;
+import lombok.Setter;
 import lombok.ToString;
 
 import java.time.LocalDateTime;
@@ -9,6 +10,7 @@ import java.time.LocalDateTime;
 @Entity
 @Table(name = "events")
 @Getter
+@Setter
 @ToString(exclude = "venue")
 public class Event {
 

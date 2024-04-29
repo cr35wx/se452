@@ -19,31 +19,53 @@ public class EventController {
     }
 
     @GetMapping
-    public List<Event> getAllEvents() {
-        return eventService.getAllEvents();
+    public ResponseEntity<List<Event>> getAllEvents() {
+        List<Event> events = eventService.getAllEvents();
+        return ResponseEntity.ok(events);
     }
 
     @GetMapping("/{id}")
-    public Event getEventById(@PathVariable Long id) {
-        return eventService.getEventById(id);
+    public ResponseEntity<Event> getEventById(@PathVariable Long id) {
+        return eventService.findById(id)
+                .map(ResponseEntity::ok)
+                .orElse(ResponseEntity.notFound().build());
+    }
+
+    @GetMapping("/name/{name}")
+    public ResponseEntity<Event> getEventByName(@PathVariable String name) {
+        Event event = eventService.findByName(name);
+        if (event != null) {
+            return ResponseEntity.ok(event);
+        } else {
+            return ResponseEntity.notFound().build();
+        }
+    }
+
+    @PostMapping("/all")
+    public ResponseEntity<List<Event>> createAllEvents(@RequestBody List<Event> events) {
+        List<Event> createdEvents = eventService.saveAll(events);
+        return ResponseEntity.status(HttpStatus.CREATED).body(createdEvents);
     }
 
     @PostMapping
-    @ResponseStatus(HttpStatus.CREATED)
-    public Event createEvent(@Valid @RequestBody Event event) {
-        return eventService.createEvent(event);
+    public ResponseEntity<Event> createEvent(@RequestBody Event event) {
+        Event createdEvent = eventService.save(event);
+        return ResponseEntity.status(HttpStatus.CREATED).body(createdEvent);
     }
 
     @PutMapping("/{id}")
-    public Event updateEvent(@PathVariable Long id, @Valid @RequestBody Event event) {
-        return eventService.updateEvent(id, event);
+    public ResponseEntity<Event> updateEvent(@PathVariable Long id, @RequestBody Event eventDetails) {
+        Event updatedEvent = eventService.updateEvent(id, eventDetails);
+        if (updatedEvent != null) {
+            return ResponseEntity.ok(updatedEvent);
+        } else {
+            return ResponseEntity.notFound().build();
+        }
     }
 
     @DeleteMapping("/{id}")
-    @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void deleteEvent(@PathVariable Long id) {
-        eventService.deleteEvent(id);
+    public ResponseEntity<Void> deleteEvent(@PathVariable Long id) {
+        eventService.deleteById(id);
+        return ResponseEntity.noContent().build();
     }
-    
-    // Add more endpoints as needed
 }

@@ -1,5 +1,6 @@
 package edu.depaul.ticketselling.management.service;
 
+import edu.depaul.ticketselling.management.model.Event;
 import edu.depaul.ticketselling.management.model.Ticket;
 import edu.depaul.ticketselling.management.repository.TicketRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,11 +21,20 @@ public class TicketService {
         return ticketRepository.findAll();
     }
 
+    public Ticket findTicketsByEventId(Long eventId) {
+        return ticketRepository.findById(eventId).orElse(null);
+    }
+
     public Ticket save(Ticket ticket) {
         return ticketRepository.save(ticket);
     }
+
     public List<Ticket> saveAll(List<Ticket> tickets) {
         return ticketRepository.saveAll(tickets);
+    }
+
+    public void deleteTicket(Long id) {
+        ticketRepository.deleteById(id);
     }
 
 }
