@@ -8,7 +8,5 @@ import java.util.List;
 
 @Repository
 public interface TicketRepository extends JpaRepository<Ticket, Long> {
-    // Custom queries if needed
-    List<Ticket> findTicketsByEventId(Long eventId);
 }
 

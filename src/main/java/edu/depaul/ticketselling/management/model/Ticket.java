@@ -5,33 +5,39 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 
-import java.math.BigDecimal;
-
 @Entity
 @Table(name = "tickets")
 @Getter
-@Setter
 @ToString
 public class Ticket {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private Long eventId; // Foreign key to Event
-    private Long guestId;
-    private BigDecimal price;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "event_id", nullable = false)
+    private Event event;
+
+    @Setter
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "account_id")
+    private Account account;
+
+    @Column(nullable = false, length = 255)
     private String seatNumber;
+
+    @Column(nullable = false)
+    private int price; // in cents
 
     public Ticket() {
 
     }
 
-    public Ticket(Long eventId, Long guestId, BigDecimal price, String seatNumber) {
-        this.eventId = eventId;
-        this.guestId = guestId;
-        this.price = price;
+    public Ticket(Event event, String seatNumber, int price) {
+        this.event = event;
         this.seatNumber = seatNumber;
+        this.price = price;
     }
 
-
-    // Other ticket-related fields
 }

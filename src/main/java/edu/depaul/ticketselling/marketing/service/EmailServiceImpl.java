@@ -30,6 +30,7 @@ public class EmailServiceImpl implements EmailService {
         MimeMessageHelper helper;
         try {
             helper = new MimeMessageHelper(mimeMessage, true);
+            helper.setFrom("Ticket-Selling <sh.kim.31.8.55@gmail.com>");
             helper.setTo(email.getRecipient());
             helper.setSubject(email.getSubject());
             helper.setText(email.getBody(), true);
