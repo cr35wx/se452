@@ -57,7 +57,7 @@ public class Populate {
         VENUES.add(capital);
     }
 
-    protected static void Events() {
+    public static void Events() {
         Venues();
         Event e0 = Event.builder()
                 .eventName("Wicked")

@@ -4,11 +4,12 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 
-import org.springframework.data.annotation.Id;
 import org.springframework.data.relational.core.mapping.Table;
 
+import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
 import lombok.Builder;
 import lombok.Data;
 
@@ -17,6 +18,7 @@ import lombok.Data;
  */
 @Data
 @Builder
+@Entity
 @Table("events")
 public class Event {
     @Id @GeneratedValue(strategy= GenerationType.AUTO) private long eventId;

@@ -2,33 +2,30 @@ package edu.depaul.ticketselling.backend;
 
 import java.time.LocalDateTime;
 
-import org.springframework.data.annotation.Id;
 import org.springframework.data.relational.core.mapping.Table;
 
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import lombok.AllArgsConstructor;
-import lombok.Data;
+import jakarta.persistence.Entity;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
 /**
  * An Administrator that has elevated permissions to create, edit, or delete an {@link Event}.
  */
-@AllArgsConstructor
 @NoArgsConstructor
-@Data
+@Entity
+@EqualsAndHashCode(callSuper = true)
 @Table("admins")
-public class Admin implements User {
-    @Id @GeneratedValue(strategy= GenerationType.AUTO) private long userId;
-    private String username;
-    private String password;
-    private String emailAddress;
-    private String phoneNumber;
-    private LocalDateTime creationDate;
+public class Admin extends User {
+
+    public Admin(long id, String username, String password, String email, String phoneNumber, LocalDateTime creationTime) {
+        super(id, username, password, email, phoneNumber, creationTime);
+    }
 
     @Override
     public String toString() {
-        return String.format("Administrator %s, User ID: %d%nEmail: %s%nPhone: %s", username, userId, emailAddress, phoneNumber);
+        return String.format("Administrator %s, User ID: %d%nEmail: %s%nPhone: %s",
+                getUsername(), getUserId(), getEmailAddress(), getPhoneNumber()
+        );
     }
 
 }
