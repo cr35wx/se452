@@ -1,9 +1,11 @@
-package edu.depaul.ticketselling.controller;
+package edu.depaul.ticketselling.management.controller;
 
-import edu.depaul.ticketselling.model.Event;
-import edu.depaul.ticketselling.service.EventService;
+import edu.depaul.ticketselling.management.model.Event;
+import edu.depaul.ticketselling.management.service.EventService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 
 import java.util.List;
 

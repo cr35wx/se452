@@ -1,8 +1,11 @@
-package edu.depaul.ticketselling.controller;
+package edu.depaul.ticketselling.management.controller;
 
+import edu.depaul.ticketselling.management.model.Purchase;
 import edu.depaul.ticketselling.management.model.Ticket;
 import edu.depaul.ticketselling.management.service.TicketService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -19,15 +22,14 @@ public class TicketController {
     }
 
     @GetMapping
-    public List<Ticket> getAllTickets() {
-        return ticketService.findAll();
-        return new ResponseEntity<>(tickets, HttpStatus.OK);
+    public ResponseEntity<List<Ticket>> getAllTickets() {
+         List<Ticket> Tickets = ticketService.findAll();
+        return ResponseEntity.ok(Tickets);
     }
 
     @GetMapping("/{eventId}")
-    public List<Ticket> getTicketsByEventId(@PathVariable Long eventId) {
+    public Ticket getTicketsByEventId(@PathVariable Long eventId) {
         return ticketService.findTicketsByEventId(eventId);
-        return new ResponseEntity<>(ticket, HttpStatus.OK);
     }
 
     @PostMapping("/purchase")
@@ -38,7 +40,7 @@ public class TicketController {
 
     @PostMapping("/cancel/{id}")
     public ResponseEntity<Void> deleteTicket(@PathVariable Long id) {
-        ticketService.cancelTicket(id);
+        ticketService.deleteTicket(id);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 

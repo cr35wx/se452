@@ -44,7 +44,7 @@ public class VenueController {
             return null; // Venue not found
         }
         venue.setId(id);
-        return updateVenue(id, venue)
+        return updateVenue(id, venue);
     }
 
     @DeleteMapping("/{id}")

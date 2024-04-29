@@ -30,7 +30,8 @@ public class PurchaseService {
     }
 
     public Purchase findById(Long id) {
-        return purchaseRepository.findById(id).orElse(null);
+        Optional<Purchase> purchase = purchaseRepository.findById(id);
+        return purchase.orElse(null);
     }
 
     public void deleteById(Long id) {

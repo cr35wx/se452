@@ -20,8 +20,8 @@ public class AccountController {
     }
 
     @GetMapping("/{email}")
-    public ResponseEntity<Account> getAccountByEmail(@PathVariable String email) {
-        Account account = accountService.findByEmail(email);
+    public ResponseEntity<Account> getAccountByEmail(@PathVariable String email, @PathVariable String password) {
+        Account account = accountService.findByEmailAndPassword(email, password);
         return ResponseEntity.ok(account);
     }
 
