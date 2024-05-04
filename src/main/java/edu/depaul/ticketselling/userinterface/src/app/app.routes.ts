@@ -7,13 +7,15 @@ import { PurchaseComponent } from './purchase/purchase.component';
 import { GetStartedComponent } from './get-started/get-started.component';
 import { AdminLoginComponent } from './admin-login/admin-login.component';
 import { AdminDashboardComponent } from './admin-dashboard/admin-dashboard.component';
+import { RegisterComponent } from './register/register.component';
 
 
 
 export const routes: Routes = [
     // Set HomeComponent as the root
-    { path: '', component: LoginComponent, pathMatch: 'full' },
+    { path: '', redirectTo: '/login', pathMatch: 'full' },
     { path: 'login', component: LoginComponent },
+    { path: 'register', component: RegisterComponent},
     { path: 'admin-login', component: AdminLoginComponent, 
     children: [
         { path: 'admin-dashboard', component: AdminDashboardComponent },
@@ -33,7 +35,7 @@ export const routes: Routes = [
 ];
 
 @NgModule({
-    imports: [RouterModule.forRoot(routes),],
+    imports: [RouterModule.forRoot(routes)],
     exports: [RouterModule]
 })
 export class AppRoutingModule { }

@@ -4,12 +4,17 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sign In</title>
-    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.23/dist/tailwind.min.css" rel="stylesheet">
 </head>
 <body class="font-sans text-gray-800">
   <div class="max-w-7xl mx-auto h-screen">
     <div class="grid md:grid-cols-2 items-center gap-8 h-full bg-gradient-to-r from-gray-50 via-[#161810] to-[#cb652e]">
-      <form class="max-w-lg mx-auto w-full p-6 bg-white rounded-lg shadow">
+      <form (ngSubmit)="login()"  class="max-w-lg mx-auto w-full p-6 bg-white rounded-lg shadow">
+        <div>
+          <a href="#" class="flex items-center mb-6 text-2xl font-semibold text-black">
+            <img class="w-8 h-8 mr-2" src="https://flowbite.s3.amazonaws.com/blocks/marketing-ui/logo.svg" alt="logo">
+            TicketSphere   
+        </a>
+        </div>
         <div class="mb-10">
           <h3 class="text-4xl font-extrabold">Sign in</h3>
           <p class="text-sm mt-6">Get exclusive deals and pricing with your own account. See new events everyday. Effortlessly access your account.</p>
@@ -40,11 +45,11 @@
           </div>
         </div>
         <div class="mt-10">
-          <button type="submit" class="w-full shadow-xl py-3 px-4 text-sm font-semibold rounded text-white bg-blue-600 hover:bg-blue-700 focus:outline-none">
+          <button type="submit" routerLink="/dashboard" class="w-full shadow-xl py-3 px-4 text-sm font-semibold rounded text-white bg-blue-600 hover:bg-blue-700 focus:outline-none">
             Log in
           </button>
         </div>
-        <p class="text-sm mt-10 text-center">Don't have an account? <a href="#" class="text-blue-600 font-semibold hover:underline ml-1">Register here</a></p>
+        <p class="text-sm mt-10 text-center">Don't have an account? <a (click)="register()" class="text-blue-600 font-semibold hover:underline ml-1">Register here</a></p>
       </form>
       <div class="h-full md:py-6 flex items-center justify-center">
         <img src="https://images.pexels.com/photos/2147029/pexels-photo-2147029.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" class="rounded-md lg:w-4/5 md:w-11/12 z-50 relative" alt="Dining Experience" />

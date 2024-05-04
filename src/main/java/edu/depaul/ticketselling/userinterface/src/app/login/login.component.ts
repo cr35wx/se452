@@ -19,4 +19,7 @@ export class LoginComponent {
     console.log('Login clicked:', this.username, this.password);
     this.router.navigate(['/dashboard']);
   }
+  register() {
+    this.router.navigate(['/register']);
+  }
 }
