@@ -1,18 +1,26 @@
-import { Component } from '@angular/core';
-import { MatButton } from '@angular/material/button';
-import { Router } from '@angular/router';
+// get-started.component.ts
+
+import { Component, OnInit } from '@angular/core';
+import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-get-started',
   standalone: true,
-  imports: [MatButton],
   templateUrl: './get-started.component.html',
-  styleUrl: './get-started.component.css'
+  styleUrls: ['./get-started.component.css']
 })
-export class GetStartedComponent {
-  constructor(private router: Router) {}
+export class GetStartedComponent implements OnInit {
+  username: string = '';
 
-  redirectToHome() {
-    this.router.navigate(['/dashboard/home']);
+  constructor(private route: ActivatedRoute, private router: Router) {}
+
+  ngOnInit() {
+    this.route.params.subscribe(params => {
+      this.username = params['username'];
+    });
+  }
+
+  redirectToEvents() {
+    this.router.navigate(['/nav/events']);
   }
 }

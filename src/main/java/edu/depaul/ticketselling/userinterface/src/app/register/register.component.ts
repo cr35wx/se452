@@ -20,9 +20,9 @@ export class RegisterComponent {
 
   register() {
     console.log('Register clicked:', this.email, this.username, this.password, this.phoneNumber);
-    // Navigate to dashboard
-    this.router.navigate(['/dashboard']);
+    this.router.navigate(['/get-started', {username: this.username}]);  // Assuming you will handle registration logic here
   }
+  
   login(){
     this.router.navigate(['/login']);
   }

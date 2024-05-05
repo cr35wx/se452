@@ -1,36 +1,28 @@
-import { Component } from '@angular/core';
-import { MatSidenavModule, MatDrawer, MatDrawerContainer, MatDrawerContent } from '@angular/material/sidenav';
-import { MatListModule } from '@angular/material/list';
-import { RouterModule } from '@angular/router';
-import { MatToolbarModule } from '@angular/material/toolbar';
-import { MatIconModule } from '@angular/material/icon';
-import { MatButton } from '@angular/material/button';
-import { Router } from '@angular/router';
-import { GetStartedComponent } from '../get-started/get-started.component';
+import { Component, OnInit } from '@angular/core';
+import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-dashboard',
   standalone: true,
-  imports: [MatSidenavModule,
-    MatListModule,
-    RouterModule,
-    MatDrawer,
-    MatDrawerContainer,
-    MatDrawerContent,
-    MatToolbarModule,
-    MatIconModule,
-    MatButton,
-    GetStartedComponent 
-  ],
+  imports: [],
   templateUrl: './dashboard.component.html',
   styleUrl: './dashboard.component.css'
 })
-export class DashboardComponent {
+export class DashboardComponent implements OnInit{
+  username: string = '';
 
-  constructor(private router: Router) {}
+  constructor(private route: ActivatedRoute, private router: Router) {}
 
-  showFiller = false;
-  redirectToHome() {
-    this.router.navigate(['/dashboard/home']);
+  ngOnInit() {
+    this.route.params.subscribe(params => {
+      this.username = params['username'];
+    });
   }
+
+  redirectToHome() {
+    this.router.navigate(['/dashboard', this.username, 'home']);
+  }
+
+
 }
+

@@ -1,0 +1,37 @@
+<mat-toolbar color="primary" class="bg-blue-500">
+    <button mat-icon-button (click)="drawer.toggle()" class="text-white">
+      <mat-icon>menu</mat-icon>
+    </button>
+  </mat-toolbar>
+  
+  <mat-drawer-container class="example-container" autosize>
+    <mat-drawer #drawer class="example-sidenav" mode="side" class=" bg-black dark:bg-gray-700">
+      <div class="flex items-center justify-center pt-6">
+        <img src="https://www.svgrepo.com/show/354455/torus.svg" alt="Logo" class="w-6 h-6 mr-2">
+        <span class="text-xl font-bold text-blue-600">TicketSphere</span>
+      </div>
+      <mat-nav-list class="mt-6 ">
+        <a mat-list-item routerLink="/nav/get-started" routerLinkActive="active" class="flex items-center p-4 my-2 text-gray-500 transition-colors duration- hover:text-blue-500 uppercase">
+          <mat-icon class="mr-4 text-left">star</mat-icon>
+          <span class="text-sm font-normal">Get Started</span>
+        </a>
+        <a mat-list-item routerLink="/nav/events" routerLinkActive="active" class="flex items-center p-4 my-2 text-gray-500 transition-colors duration-200 hover:text-blue-500 dark:text-gray-200 uppercase">
+          <mat-icon class="mr-4 text-left">home</mat-icon>
+          <span class="text-sm font-normal">Events</span>
+        </a>
+        <a mat-list-item routerLink="/nav/purchase" routerLinkActive="active" class="flex items-center p-4 my-2 text-gray-500 transition-colors duration-200 hover:text-blue-500 dark:text-gray-200 uppercase">
+          <mat-icon class="mr-4 text-left">shopping_cart</mat-icon>
+          <span class="text-sm font-normal">Purchase</span>
+        </a>
+        <a mat-list-item routerLink="/nav/dashboard" routerLinkActive="active" class="flex items-center p-4 my-2 text-gray-500 transition-colors duration-200 hover:text-blue-500 dark:text-gray-200 uppercase">
+          <mat-icon class="mr-4 text-left">dashboard</mat-icon>
+          <span class="text-sm font-normal">Dashboard</span>
+        </a>
+      </mat-nav-list>
+    </mat-drawer>
+  
+    <div class="example-sidenav-content">
+      <router-outlet></router-outlet>
+    </div>
+</mat-drawer-container>
+  
