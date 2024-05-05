@@ -5,5 +5,6 @@ export interface Event {
     venue: string;
     dateTime: Date;
     color: string; 
+    defaultPrice: number;
   }
   

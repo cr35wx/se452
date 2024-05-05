@@ -14,7 +14,8 @@ export class EventsService {
             artist: 'The Cool Cats',
             venue: 'Downtown Arena',
             dateTime: new Date(2024, 5, 15, 20, 0), // June 15, 2024, 20:00
-            color: 'from-blue-500'
+            color: 'from-blue-500',
+            defaultPrice: 50
         },
         {
             id: 2,
@@ -22,7 +23,8 @@ export class EventsService {
             artist: 'Smooth Jazz Ensemble',
             venue: 'Riverside Jazz Club',
             dateTime: new Date(2024, 5, 20, 19, 30), // June 20, 2024, 19:30
-            color: 'from-green-500'
+            color: 'from-green-500',
+            defaultPrice: 40
         },
         {
             id: 3,
@@ -30,7 +32,8 @@ export class EventsService {
             artist: 'The Rock Legends',
             venue: 'The Big Stadium',
             dateTime: new Date(2024, 6, 1, 18, 0), // July 1, 2024, 18:00
-            color: 'from-red-500'
+            color: 'from-red-500',
+            defaultPrice: 60
         },
         {
             id: 4,
@@ -38,7 +41,8 @@ export class EventsService {
             artist: 'City Orchestra',
             venue: 'Grand Concert Hall',
             dateTime: new Date(2024, 6, 11, 20, 0), // July 11, 2024, 20:00
-            color: 'from-purple-500'
+            color: 'from-purple-500',
+            defaultPrice: 55
         },
         {
             id: 5,
@@ -46,7 +50,8 @@ export class EventsService {
             artist: 'Metropolitan Opera Stars',
             venue: 'Opera House',
             dateTime: new Date(2024, 6, 18, 20, 0), // July 18, 2024, 20:00
-            color: 'from-yellow-500'
+            color: 'from-yellow-500',
+            defaultPrice: 65
         },
         {
             id: 6,
@@ -54,7 +59,8 @@ export class EventsService {
             artist: 'Various Artists',
             venue: 'City Theater',
             dateTime: new Date(2024, 6, 25, 19, 0), // July 25, 2024, 19:00
-            color: 'from-indigo-500'
+            color: 'from-indigo-500',
+            defaultPrice: 45
         }
     ];
 
