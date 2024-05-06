@@ -4,22 +4,23 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
-import edu.depaul.ticketselling.marketing.service.Email;
-import edu.depaul.ticketselling.marketing.service.EmailService;
+import edu.depaul.ticketselling.marketing.controller.EventReminderController;
+import edu.depaul.ticketselling.marketing.controller.OnSaleNotificationController;
 
 @Component
 public class EmailTest implements CommandLineRunner {
 
     @Autowired
-    private EmailService emailService;
+    private OnSaleNotificationController onSaleNotificationController;
+
+    @Autowired
+    private EventReminderController eventReminderController;
 
     @Override
     public void run(String... args) throws Exception {
-        Email email = new Email();
-        email.setRecipient("shkim901101@naver.com");
-        email.setSubject("Test Email");
-        email.setBody("This is a test email!");
-
-        emailService.sendEmail(email);
+        // Only test sendOnSaleNotificationEmails and sendEventReminderEmails.
+        // EventChange and OrderConfirm is need management's purchase and event change/cancel.
+        onSaleNotificationController.sendOnSaleNotificationEmails();
+        eventReminderController.sendEventReminderEmails();
     }
 }
