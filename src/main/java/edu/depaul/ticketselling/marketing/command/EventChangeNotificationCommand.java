@@ -15,6 +15,9 @@ import org.springframework.web.bind.annotation.RestController;
  * [Marketing and communication]
  * This code is Event cancellations / changes.
  * 
+ * This code is currently incomplete. 
+ * When the Update code in Management is completed in the future, it will be connected and operated.
+ * 
  * @author Suhwan Kim
  */
 
@@ -32,21 +35,23 @@ public class EventChangeNotificationCommand {
             sendEventDeletionNotification(recipient, event);
         }
     }
-
+    
     private void sendEventUpdateNotification(String recipient, Event event) {
         String subject = "Event Change Notification";
         StringBuilder bodyBuilder = new StringBuilder();
-        bodyBuilder.append("Your Event is Updated!:\n");
-        bodyBuilder.append("Please be informed that there has been an update in the schedule for ").append(event.getName()).append(".\n\n");
-        bodyBuilder.append("Updated Event Information:\n");
-        bodyBuilder.append("Event Name: ").append(event.getName()).append("\n");
-        bodyBuilder.append("Artist: ").append(event.getArtist()).append("\n");
-        bodyBuilder.append("Date and Time: ").append(event.getDatetime()).append("\n");
-        bodyBuilder.append("Venue: ").append(event.getVenue().getName()).append("\n");
-        bodyBuilder.append("Address: ").append(event.getVenue().getAddressLine1()).append(", ")
+        bodyBuilder.append("<html><body>");
+        bodyBuilder.append("<p>Your Event is Updated!</p><br>");
+        bodyBuilder.append("<p>Please be informed that there has been an update in the schedule for ").append(event.getName()).append(".</p><br>");
+        bodyBuilder.append("<p>Updated Event Information:</p><br>");
+        bodyBuilder.append("<p>Event Name: ").append(event.getName()).append("</p>");
+        bodyBuilder.append("<p>Artist: ").append(event.getArtist()).append("</p>");
+        bodyBuilder.append("<p>Date and Time: ").append(event.getDatetime()).append("</p>");
+        bodyBuilder.append("<p>Venue: ").append(event.getVenue().getName()).append("</p>");
+        bodyBuilder.append("<p>Address: ").append(event.getVenue().getAddressLine1()).append(", ")
                 .append(event.getVenue().getAddressLine2()).append(", ").append(event.getVenue().getCity()).append(", ")
-                .append(event.getVenue().getState()).append(", ").append(event.getVenue().getPostalCode()).append("\n");
+                .append(event.getVenue().getState()).append(", ").append(event.getVenue().getPostalCode()).append("</p>");
     
+        bodyBuilder.append("</body></html>");
         String body = bodyBuilder.toString();
     
         Email email = Email.builder()
@@ -57,10 +62,15 @@ public class EventChangeNotificationCommand {
     
         emailService.sendEmail(email);
     }
-
+    
     private void sendEventDeletionNotification(String recipient, Event event) {
         String subject = "Event Deletion Notification";
-        String body = "Please be informed that the event " + event.getName() + " has been deleted.";
+        StringBuilder bodyBuilder = new StringBuilder();
+        bodyBuilder.append("<html><body>");
+        bodyBuilder.append("<p>Please be informed that the event ").append(event.getName()).append(" has been deleted.</p>");
+        bodyBuilder.append("</body></html>");
+        String body = bodyBuilder.toString();
+    
         Email email = Email.builder()
                 .recipient(recipient)
                 .subject(subject)
