@@ -1,11 +1,11 @@
 package edu.depaul.ticketselling.backend;
 
-import org.springframework.data.relational.core.mapping.Table;
-
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -16,14 +16,26 @@ import lombok.Setter;
  */
 @Getter
 @Setter
+@AllArgsConstructor
 @Builder
 @Entity
-@Table("venues")
+@Table(name = "venues")
 public class Venue {
-    @Id @GeneratedValue(strategy= GenerationType.AUTO) private long venueId;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private long venueId;
+
+    @Column(nullable = false, length = 50)
     private String venueName;
+
+    @Column(nullable = false)
     private Address address;
+
+    @Column(nullable = false)
     private long seatingCapacity;
+
+    @Column(columnDefinition = "TEXT")
+    private String description;
 
     @Override
     public String toString() {
@@ -51,10 +63,19 @@ public class Venue {
     @AllArgsConstructor
     @Builder
     public static class Address {
+        @Column(nullable = false, length = 100)
         private String line1;
+
+        @Column(length = 100)
         private String line2;   // optional
+
+        @Column(nullable = false, length = 50)
         private String city;
+
+        @Column(nullable = false, length = 2)
         private String state;
+
+        @Column(nullable = false, length = 16)
         private String postalCode;
 
         @Override
