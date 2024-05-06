@@ -21,3 +21,35 @@ INSERT INTO venues(name, capacity, address_line1, city, state, postal_code)
 
 INSERT INTO venues(name, capacity, address_line1, city, state, postal_code)
     VALUES ('Capital One Arena', 20000, '601 F Street NW', 'Washington', 'DC', '20004');
+
+-- Update for marketing test
+-- @Author Suhwan Kim
+-- test Accounts
+INSERT INTO accounts(email, password, phone_number, created_date)
+    VALUES ('shkim901101@naver.com', '0000', '1234567890', CURRENT_DATE);
+
+INSERT INTO accounts(email, password, phone_number, created_date)
+    VALUES ('shkim901101@gmail.com', '1111', '1234567890', CURRENT_DATE);
+
+INSERT INTO accounts(email, password, phone_number, created_date)
+    VALUES ('suhwankim1101@gmail.com', '2222', '1234567890', CURRENT_DATE);
+
+-- test events
+INSERT INTO events(name, artist, datetime, venue_id)
+    VALUES ('Test Event 1', 'Test Artist 1', CURRENT_TIMESTAMP, 2);
+
+INSERT INTO events(name, artist, datetime, venue_id)
+    VALUES ('Test Event 2', 'Test Artist 2', CURRENT_TIMESTAMP, 3);
+
+INSERT INTO events(name, artist, datetime, venue_id)
+    VALUES ('Test Event 3', 'Test Artist 3', CURRENT_TIMESTAMP, 4);
+
+-- test ticket
+INSERT INTO tickets(event_id, account_id, seat_number, price)
+    VALUES (3, 1, '9C', 2999);
+
+INSERT INTO tickets(event_id, account_id, seat_number, price)
+    VALUES (2, 2, '9C', 3999);
+
+INSERT INTO tickets(event_id, account_id, seat_number, price)
+    VALUES (1, 3, '9C', 4999);
