@@ -4,6 +4,13 @@ import edu.depaul.ticketselling.management.model.Event;
 import edu.depaul.ticketselling.marketing.service.Email;
 import edu.depaul.ticketselling.marketing.service.EmailService;
 
+import org.springframework.stereotype.Component;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+@RestController
+@RequestMapping("/email")
+@Component
 /**
  * [Marketing and communication]
  * This code is Event cancellations / changes.
