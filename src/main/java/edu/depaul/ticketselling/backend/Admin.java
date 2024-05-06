@@ -2,8 +2,6 @@ package edu.depaul.ticketselling.backend;
 
 import java.time.LocalDateTime;
 
-import org.springframework.data.relational.core.mapping.Table;
-
 import jakarta.persistence.Entity;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
@@ -14,7 +12,6 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Entity
 @EqualsAndHashCode(callSuper = true)
-@Table("admins")
 public class Admin extends User {
 
     public Admin(long id, String username, String password, String email, String phoneNumber, LocalDateTime creationTime) {

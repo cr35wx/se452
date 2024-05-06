@@ -4,12 +4,15 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 
-import org.springframework.data.relational.core.mapping.Table;
-
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.Table;
 import lombok.Builder;
 import lombok.Data;
 
@@ -19,12 +22,23 @@ import lombok.Data;
 @Data
 @Builder
 @Entity
-@Table("events")
+@Table(name = "events")
 public class Event {
-    @Id @GeneratedValue(strategy= GenerationType.AUTO) private long eventId;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private long eventId;
+
+    @Column(nullable = false, length = 50, unique = true)
     private String eventName;
+
+    @Column(nullable = false, length = 50)
     private String artist;
+
+    @Column(nullable = false)
     private LocalDateTime dateTime;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "venue_id", nullable = false)
     private Venue venue;
 
     /**
