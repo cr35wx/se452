@@ -13,13 +13,17 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 /**
  * An {@code Event} represents a concert, show, lecture, or other performance that takes place in a {@link Venue}.
  */
 @Data
+@AllArgsConstructor
+@NoArgsConstructor
 @Builder
 @Entity
 @Table(name = "events")
@@ -34,7 +38,7 @@ public class Event {
     @Column(nullable = false, length = 50)
     private String artist;
 
-    @Column(nullable = false)
+    @Column(nullable = false, name = "date_time")
     private LocalDateTime dateTime;
 
     @ManyToOne(fetch = FetchType.LAZY)
@@ -44,7 +48,7 @@ public class Event {
     /**
      * @return the {@code Address} field of this {@code Event}'s {@code Venue}.
      */
-    public Venue.Address getVenueAddress() {
+    public String getVenueAddress() {
         return venue.getAddress();
     }
 
