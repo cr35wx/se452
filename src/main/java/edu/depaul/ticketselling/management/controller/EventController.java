@@ -6,7 +6,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-
+/**
+* The contents were added and modified for the implementation of marketing functions (May 5 2024)
+* src/main/java/edu/depaul/ticketselling/marketing/controller/EventChangeNotificationController.java
+*
+* Please check the annotated comment.
+* @author Suhwan Kim
+*/
+import edu.depaul.ticketselling.marketing.controller.EventChangeNotificationController; // Added by Suhwan.
 import java.util.List;
 
 @RestController
@@ -14,13 +21,6 @@ import java.util.List;
 public class EventController {
 
     private final EventService eventService;
-    /**
-    * The contents were added and modified for the implementation of marketing functions (May 5 2024)
-    * src/main/java/edu/depaul/ticketselling/marketing/controller/EventChangeNotificationController.java
-    *
-    * Please check the annotated comment.
-    * @author Suhwan Kim
-    */
     private final EventChangeNotificationController eventChangeNotificationController; // Added by Suhwan.
 
     @Autowired
