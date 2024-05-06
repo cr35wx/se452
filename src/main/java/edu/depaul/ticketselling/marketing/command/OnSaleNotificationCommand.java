@@ -1,16 +1,17 @@
 package edu.depaul.ticketselling.marketing.command;
 
 import java.util.List;
+
+import org.springframework.stereotype.Component;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
 import edu.depaul.ticketselling.marketing.service.Email;
 import edu.depaul.ticketselling.marketing.service.EmailService;
 import edu.depaul.ticketselling.backend.Event;
 import edu.depaul.ticketselling.backend.Venue;
 import edu.depaul.ticketselling.backend.User;
 import edu.depaul.ticketselling.backend.IVenueRepository;
-
-import org.springframework.stereotype.Component;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/email")
@@ -34,21 +35,23 @@ public class OnSaleNotificationCommand {
         String recipient = user.getEmailAddress();
         String subject = "New Events On Sale";
         StringBuilder bodyBuilder = new StringBuilder();
-        bodyBuilder.append("Good news! Tickets for the following events are now on sale:\n\n");
-
+        bodyBuilder.append("<html><body>");
+        bodyBuilder.append("<p>Good news! Tickets for the following events are now on sale:</p><br>");
+    
         for (Event event : events) {
-            bodyBuilder.append("Event: ").append(event.getEventName()).append("\n");
-            bodyBuilder.append("Artist: ").append(event.getArtist()).append("\n");
-            bodyBuilder.append("Date and Time: ").append(event.getDateTime()).append("\n");
-
+            bodyBuilder.append("<p>Event: ").append(event.getEventName()).append("</p>");
+            bodyBuilder.append("<p>Artist: ").append(event.getArtist()).append("</p>");
+            bodyBuilder.append("<p>Date and Time: ").append(event.getDateTime()).append("</p>");
+    
             Venue venue = venueRepository.findById(event.getVenue().getVenueId()).orElse(null);
             if (venue != null) {
-                bodyBuilder.append("Venue: ").append(venue.getVenueName()).append("\n");
-                bodyBuilder.append("Address: ").append(venue.getAddress()).append("\n");
+                bodyBuilder.append("<p>Venue: ").append(venue.getVenueName()).append("</p>");
+                bodyBuilder.append("<p>Address: ").append(venue.getAddress()).append("</p>");
             }
-            bodyBuilder.append("\n");
+            bodyBuilder.append("<br>");
         }
-
+    
+        bodyBuilder.append("</body></html>");
         String body = bodyBuilder.toString();
         
         Email email = Email.builder()
