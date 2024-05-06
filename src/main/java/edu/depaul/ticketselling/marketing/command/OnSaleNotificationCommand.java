@@ -8,6 +8,13 @@ import edu.depaul.ticketselling.backend.Venue;
 import edu.depaul.ticketselling.backend.User;
 import edu.depaul.ticketselling.backend.IVenueRepository;
 
+import org.springframework.stereotype.Component;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+@RestController
+@RequestMapping("/email")
+@Component
 /**
  * [Marketing and communication]
  * This code is the Command of On Sale Notification.
