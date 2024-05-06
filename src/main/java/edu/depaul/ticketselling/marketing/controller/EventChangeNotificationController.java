@@ -8,13 +8,19 @@ import edu.depaul.ticketselling.marketing.command.EventChangeNotificationCommand
 import edu.depaul.ticketselling.management.repository.AccountRepository;
 import edu.depaul.ticketselling.management.model.Event;
 
+import org.springframework.stereotype.Component;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+@RestController
+@RequestMapping("/email")
+@Component
 /**
  * [Marketing and communication]
  * This code is Controller of Event cancellations / changes.
  * 
  * @author Suhwan Kim
  */
-@Component
 public class EventChangeNotificationController {
     private EventChangeNotificationCommand eventChangeNotificationCommand;
     private final AccountRepository accountRepository;
