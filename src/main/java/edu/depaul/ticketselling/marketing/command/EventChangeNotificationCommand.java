@@ -15,9 +15,6 @@ import org.springframework.web.bind.annotation.RestController;
  * [Marketing and communication]
  * This code is Event cancellations / changes.
  * 
- * This code is currently incomplete. 
- * When the Update code in Management is completed in the future, it will be connected and operated.
- * 
  * @author Suhwan Kim
  */
 
