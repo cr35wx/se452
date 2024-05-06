@@ -5,8 +5,11 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
+import org.springframework.transaction.annotation.Transactional;
 
+@SpringBootApplication
 public class VenueRepositoryTest {
     @Autowired
     private VenueService venueService;
@@ -16,6 +19,7 @@ public class VenueRepositoryTest {
     }
 
     @Bean
+    @Transactional
     CommandLineRunner run() {
         return args -> {
             List<Venue> venues = Populate.VENUES;

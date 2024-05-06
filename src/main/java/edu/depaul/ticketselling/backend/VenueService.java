@@ -5,30 +5,32 @@ import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
+@Service
 public class VenueService {
-    private final IVenueRepository eventRepository;
+    private final IVenueRepository venueRepository;
 
     @Autowired
-    public VenueService(IVenueRepository eventRepository) {
-        this.eventRepository = eventRepository;
+    public VenueService(IVenueRepository venueRepository) {
+        this.venueRepository = venueRepository;
     }
 
     public List<Venue> findAll() {
-        return StreamSupport.stream(eventRepository.findAll().spliterator(), false)
+        return StreamSupport.stream(venueRepository.findAll().spliterator(), false)
                 .collect(Collectors.toList());
     }
 
     public List<Venue> findByName(String venueName) {
-        return eventRepository.findVenueByName(venueName);
+        return venueRepository.findVenueByVenueName(venueName);
     }
 
-    public Venue findByAddress(String address) {
-        return eventRepository.findVenueByAddress(address);
+    public Venue findByVenueId(long venueId) {
+        return venueRepository.findById(venueId);
     }
 
     public void saveAll(List<Venue> events) {
-        eventRepository.saveAll(events);
+        venueRepository.saveAll(events);
     }
 
 }
