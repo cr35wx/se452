@@ -1,12 +1,12 @@
 package edu.depaul.ticketselling.marketing.command;
 
-import edu.depaul.ticketselling.management.model.Ticket;
-import edu.depaul.ticketselling.marketing.service.Email;
-import edu.depaul.ticketselling.marketing.service.EmailService;
-
 import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import edu.depaul.ticketselling.management.model.Ticket;
+import edu.depaul.ticketselling.marketing.service.Email;
+import edu.depaul.ticketselling.marketing.service.EmailService;
 
 @RestController
 @RequestMapping("/email")
@@ -27,12 +27,14 @@ public class OrderConfirmationCommand {
     public void execute(String recipient, Ticket ticket) {
         String subject = "Order Confirmation";
         StringBuilder bodyBuilder = new StringBuilder();
-        bodyBuilder.append("Order Confirmation\n\n");
-        bodyBuilder.append("Thank you for purchasing tickets. Your Order : \n");
-        bodyBuilder.append("Event Id: ").append(ticket.getEvent()).append("\n");
-        bodyBuilder.append("Seat Number: ").append(ticket.getSeatNumber()).append("\n");
-        bodyBuilder.append("Price: ").append(ticket.getPrice() / 100).append("\n");
-
+        bodyBuilder.append("<html><body>");
+        bodyBuilder.append("<p>Order Confirmation</p><br>");
+        bodyBuilder.append("<p>Thank you for purchasing tickets. Your Order :</p><br>");
+        bodyBuilder.append("<p>Event Id: ").append(ticket.getEvent()).append("</p>");
+        bodyBuilder.append("<p>Seat Number: ").append(ticket.getSeatNumber()).append("</p>");
+        bodyBuilder.append("<p>Price: ").append(ticket.getPrice() / 100).append("</p>");
+    
+        bodyBuilder.append("</body></html>");
         String body = bodyBuilder.toString();
         
         Email email = Email.builder()
@@ -43,5 +45,4 @@ public class OrderConfirmationCommand {
         
         emailService.sendEmail(email);
     }
-
 }
