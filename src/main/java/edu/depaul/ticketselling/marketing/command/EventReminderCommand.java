@@ -5,6 +5,13 @@ import edu.depaul.ticketselling.backend.User;
 import edu.depaul.ticketselling.marketing.service.Email;
 import edu.depaul.ticketselling.marketing.service.EmailService;
 
+import org.springframework.stereotype.Component;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+@RestController
+@RequestMapping("/email")
+@Component
 /**
  * [Marketing and communication]
  * This code is Event reminders of the E-mail marketing service.
