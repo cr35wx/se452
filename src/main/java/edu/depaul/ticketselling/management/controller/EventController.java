@@ -14,10 +14,20 @@ import java.util.List;
 public class EventController {
 
     private final EventService eventService;
+    /**
+    * The contents were added and modified for the implementation of marketing functions (May 5 2024)
+    * src/main/java/edu/depaul/ticketselling/marketing/controller/EventChangeNotificationController.java
+    *
+    * Please check the annotated comment.
+    * @author Suhwan Kim
+    */
+    private final EventChangeNotificationController eventChangeNotificationController; // Added by Suhwan.
 
     @Autowired
-    public EventController(EventService eventService) {
+    public EventController(EventService eventService, 
+                        EventChangeNotificationController eventChangeNotificationController) { // Modified by Suhwan.
         this.eventService = eventService;
+        this.eventChangeNotificationController = eventChangeNotificationController; // Modified by Suhwan.
     }
 
     @GetMapping
@@ -59,6 +69,7 @@ public class EventController {
     public ResponseEntity<Event> updateEvent(@PathVariable Long id, @RequestBody Event eventDetails) {
         Event updatedEvent = eventService.updateEvent(id, eventDetails);
         if (updatedEvent != null) {
+            eventChangeNotificationController.handleEventChangeNotification(updatedEvent, true); // Added by Suhwan.
             return ResponseEntity.ok(updatedEvent);
         } else {
             return ResponseEntity.notFound().build();
@@ -67,6 +78,7 @@ public class EventController {
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteEvent(@PathVariable Long id) {
+        eventChangeNotificationController.handleEventDeletionNotification(eventService.findById(id).orElse(null)); // Added by Suhwan.
         eventService.deleteById(id);
         return ResponseEntity.noContent().build();
     }
