@@ -7,14 +7,28 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
+/**
+* The contents were added and modified for the implementation of marketing functions (May 5 2024)
+* src/main/java/edu/depaul/ticketselling/marketing/controller/OrderConfirmationController.java
+*
+* Please check the annotated comment.
+* @author Suhwan Kim
+*/
 import java.util.List;
+import edu.depaul.ticketselling.marketing.controller.OrderConfirmationController;
 
 @RestController
 @RequestMapping("/tickets")
 public class TicketController {
 
     private final TicketService ticketService;
+    private final OrderConfirmationController orderConfirmationController; // Added by Suhwan.
+
+    @Autowired
+    public TicketController(TicketService ticketService, OrderConfirmationController orderConfirmationController) { // Modified by Suhwan.
+        this.ticketService = ticketService;
+        this.orderConfirmationController = orderConfirmationController; // Added by Suhwan.
+    }
 
     @Autowired
     public TicketController(TicketService ticketService) {
@@ -35,6 +49,7 @@ public class TicketController {
     @PostMapping("/purchase")
     public ResponseEntity<Ticket> purchaseTicket(@RequestBody Ticket ticket) {
         Ticket purchasedTicket = ticketService.save(ticket);
+        orderConfirmationController.confirmOrder(purchasedTicket); // Added by Suhwan.
         return new ResponseEntity<>(purchasedTicket, HttpStatus.CREATED);
     }
 
