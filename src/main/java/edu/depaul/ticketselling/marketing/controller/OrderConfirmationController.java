@@ -14,13 +14,13 @@ import edu.depaul.ticketselling.management.repository.AccountRepository;
 
 @RestController
 @RequestMapping("/email")
+@Component
 /**
  * [Marketing and communication]
  * This code is the Controller of Order Confirmation.
  * 
  * @author Suhwan Kim
  */
-@Component
 public class OrderConfirmationController {
     private final OrderConfirmationCommand orderConfirmationCommand;
     private final AccountRepository accountRepository;
