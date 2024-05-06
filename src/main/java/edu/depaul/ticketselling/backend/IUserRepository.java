@@ -1,5 +1,7 @@
 package edu.depaul.ticketselling.backend;
 
+import java.util.List;
+
 import org.springframework.data.repository.CrudRepository;
 
 public interface IUserRepository<T extends User> extends CrudRepository<T, Long> {
@@ -8,6 +10,7 @@ public interface IUserRepository<T extends User> extends CrudRepository<T, Long>
     User findUserByPhone(String phoneNumber);
     User findUserById(Long id);
     User findByEmailAndPassword(String email, String password);
+    
     /**
     * This feature was added for Event Reminder.
     * src/main/java/edu/depaul/ticketselling/marketing/controller/EventReminderController.java
