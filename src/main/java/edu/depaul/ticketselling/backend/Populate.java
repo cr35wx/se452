@@ -23,7 +23,7 @@ public class Populate {
         return Tickets();
     }
 
-    protected static void Venues() {
+    public static List<Venue> Venues() {
         Venue kresge = Venue.builder().venueName("Kresge Auditorium").seatingCapacity(3917).addressLine1("4000 M-37").city("Interlochen").state("MI").postalCode("49643").build();
         VENUES.add(kresge);
 
@@ -47,9 +47,10 @@ public class Populate {
 
         Venue capital = Venue.builder().venueName("Capital One Arena").seatingCapacity(20000).addressLine1("601 F Street NW").city("Washington").state("DC").postalCode("20004").build();
         VENUES.add(capital);
+        return VENUES;
     }
 
-    public static void Events() {
+    public static List<Event> Events() {
         Venues();
         Event e0 = Event.builder()
                 .eventName("Wicked")
@@ -100,7 +101,7 @@ public class Populate {
         EVENTS.add(e5);
 
         Event e6 = Event.builder()
-                .eventName("Chicago Symphony Orchestra")
+                .eventName("Vienna Philharmonic")
                 .artist("Riccardo Muti")
                 .dateTime(LocalDateTime.of(2024, 6, 18, 18, 0))
                 .venue(VENUES.get(ThreadLocalRandom.current().nextInt(0, VENUES.size())))
@@ -140,7 +141,7 @@ public class Populate {
         EVENTS.add(ea);
 
         Event eb = Event.builder()
-                .eventName("Wicked")
+                .eventName("Frozen")
                 .artist("Broadway on Tour")
                 .dateTime(LocalDateTime.of(2024, 4, 20, 20, 0))
                 .venue(VENUES.get(ThreadLocalRandom.current().nextInt(0, VENUES.size())))
@@ -178,6 +179,7 @@ public class Populate {
                 .venue(VENUES.get(ThreadLocalRandom.current().nextInt(0, VENUES.size())))
                 .build();
         EVENTS.add(ef);
+        return EVENTS;
     }
 
     public static List<Ticket> Tickets() {

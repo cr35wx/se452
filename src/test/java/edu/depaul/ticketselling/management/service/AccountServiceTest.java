@@ -1,25 +1,28 @@
 package edu.depaul.ticketselling.management.service;
 
-import edu.depaul.ticketselling.management.model.Account;
-import edu.depaul.ticketselling.management.repository.AccountRepository;
-import edu.depaul.ticketselling.management.service.AccountService;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
-import java.util.Arrays;
-import java.util.List;
-import java.util.Optional;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.mockito.Mockito.*;
+import edu.depaul.ticketselling.backend.Customer;
+import edu.depaul.ticketselling.backend.IUserRepository;
+import edu.depaul.ticketselling.backend.User;
 
 public class AccountServiceTest {
 
     @Mock
-    private AccountRepository accountRepository;
+    private IUserRepository<User> accountRepository;
 
     @InjectMocks
     private AccountService accountService;
@@ -33,11 +36,13 @@ public class AccountServiceTest {
     @Test
     public void testFindAll() {
         // Given
-        List<Account> accounts = Arrays.asList(new Account(), new Account());
+        List<User> accounts = Arrays.asList(new Customer(), new Customer());
         when(accountRepository.findAll()).thenReturn(accounts);
 
         // When
-        List<Account> result = accountService.findAll();
+        List<User> result = new ArrayList<>();
+        Iterable<User> temp = accountService.findAll();
+        temp.forEach(result::add);
 
         // Then
         assertEquals(accounts.size(), result.size());

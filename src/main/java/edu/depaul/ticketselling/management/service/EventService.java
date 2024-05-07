@@ -1,33 +1,32 @@
 package edu.depaul.ticketselling.management.service;
 
-import edu.depaul.ticketselling.management.interfaces.IEventService;
-import edu.depaul.ticketselling.management.model.Event;
-import edu.depaul.ticketselling.management.repository.EventRepository;
+import edu.depaul.ticketselling.backend.Event;
+import edu.depaul.ticketselling.backend.IEventRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
 
 @Service
-public class EventService implements IEventService {
-    private final EventRepository eventRepository;
+public class EventService {
+//public class EventService implements IEventService {
+    private final IEventRepository eventRepository;
 
     @Autowired
-    public EventService(EventRepository eventRepository) {
+    public EventService(IEventRepository eventRepository) {
         this.eventRepository = eventRepository;
     }
 
-    public List<Event> getAllEvents() {
+    public List<Event> findAllEvents() {
         return StreamSupport.stream(eventRepository.findAll().spliterator(), false)
                 .collect(Collectors.toList());
     }
 
     public Event findByName(String name) {
-        return eventRepository.findByName(name);
+        return eventRepository.findByEventName(name);
     }
 
     public Optional<Event> findById(Long id) {
@@ -43,20 +42,21 @@ public class EventService implements IEventService {
     }
 
     public List<Event> saveAll(List<Event> events) {
-        return eventRepository.saveAll(events);
+        eventRepository.saveAll(events);
+        return events;
     }
 
     public Event updateEvent(Long id, Event updatedEvent) {
         return findById(id)
                 .map(existingEvent -> {
-                    if (updatedEvent.getName() != null) {
-                        existingEvent.setName(updatedEvent.getName());
+                    if (updatedEvent.getEventName() != null) {
+                        existingEvent.setEventName(updatedEvent.getEventName());
                     }
                     if (updatedEvent.getArtist() != null) {
                         existingEvent.setArtist(updatedEvent.getArtist());
                     }
-                    if (updatedEvent.getDatetime() != null) {
-                        existingEvent.setDatetime(updatedEvent.getDatetime());
+                    if (updatedEvent.getDateTime() != null) {
+                        existingEvent.setDateTime(updatedEvent.getDateTime());
                     }
                     if (updatedEvent.getVenue() != null) {
                         existingEvent.setVenue(updatedEvent.getVenue());
