@@ -1,5 +1,12 @@
 package edu.depaul.ticketselling;
 
+// import edu.depaul.ticketselling.marketing.model.*;
+// import edu.depaul.ticketselling.marketing.service.*;
+// import edu.depaul.ticketselling.marketing.controller.EventChangeNotificationController;
+// import edu.depaul.ticketselling.marketing.controller.EventReminderController;
+// import edu.depaul.ticketselling.marketing.controller.OnSaleNotificationController;
+// import edu.depaul.ticketselling.marketing.controller.OrderConfirmationController;
+
 import edu.depaul.ticketselling.management.model.Account;
 import edu.depaul.ticketselling.management.model.Event;
 import edu.depaul.ticketselling.management.model.Ticket;
@@ -92,4 +99,100 @@ public class TicketsellingApplication {
 
         };
     }
+/**
+ * [Marketing and communication]
+ * Temporary codes for marketing mail transfer test. Only turn off annotation when testing.
+ *
+ * @author Suhwan Kim
+ */
+    //     @Bean
+//     @Transactional
+//     CommandLineRunner runner(mkVenueService venueService, mkEventService eventService,
+//                              mkTicketService ticketService, mkAccountService accountService,
+//                              OnSaleNotificationController onSaleNotificationController,
+//                              OrderConfirmationController orderConfirmationController,
+//                              EventReminderController eventReminderController,
+//                              EventChangeNotificationController eventChangeNotificationController) {
+//         return args -> {
+//             // create venues first, then events, then tickets to go to those events, then
+//             // accounts, and give some tickets to those accounts
+//             mkVenue venue1 = new mkVenue("The Grand Theatre", "123-456-7890", "info@grandtheatre.com"
+//                     , 1000,
+//                     "123 Main St", "Springfield", "IL", "12345", "A historic theater with " +
+//                     "stunning architecture and modern amenities.");
+
+//             mkVenue venue2 = new mkVenue("City Music Hall", "987-654-3210", "events@citymusichall" +
+//                     ".com", 800,
+//                     "456 Center Ave", "Metropolis", "NY", "54321", "A state-of-the-art concert " +
+//                     "venue located in the heart of the city.");
+
+//             mkVenue venue3 = new mkVenue("Lakeview Pavilion", "555-123-4567", "lakeviewpavilion@gmail" +
+//                     ".com", 300,
+//                     "789 Lakeside Blvd", "Lakeview", "CA", "67890", "A beautiful outdoor pavilion" +
+//                     " overlooking the lake, perfect for weddings and events.");
+
+//             venueService.saveAll(List.of(venue1, venue2, venue3));
+//             venue1 = venueService.findByAddress("123 Main St");
+//             venue2 = venueService.findByAddress("456 Center Ave");
+//             venue3 = venueService.findByAddress("456 Center Ave");
+
+//             mkEvent event1 = new mkEvent("Concert", "John Doe Band",
+//                     LocalDateTime.of(2024, 5, 7, 10, 0), venue1);
+
+//             mkEvent event2 = new mkEvent("Comedy Show", "Laughter Unlimited",
+//                     LocalDateTime.of(2024, 6, 10, 18, 30), venue2);
+
+//             mkEvent event3 = new mkEvent("Art Exhibition", "Creative Minds Gallery",
+//                     LocalDateTime.of(2024, 7, 5, 10, 0), venue3);
+
+//             eventService.saveAll(List.of(event1, event2, event3));
+//             event1 = eventService.findByName("Concert");
+//             event2 = eventService.findByName("Comedy Show");
+//             event3 = eventService.findByName("Art Exhibition");
+
+//             System.out.println("\nEVENT CHECK : " + venue1 + " " + venue2 + " " + venue3 + " " + event1 + " " + event2 + " " + event3);
+
+//             mkTicket ticket1 = new mkTicket(event1, "A1", 2500); // Seat A1, $25.00
+//             mkTicket ticket2 = new mkTicket(event1, "B5", 2000); // Seat B5, $20.00
+//             mkTicket ticket3 = new mkTicket(event2, "C3", 1800); // Seat C3, $18.00
+//             mkTicket ticket4 = new mkTicket(event3, "D2", 3000); // Seat D2, $30.00
+
+//             List<mkTicket> tickets = ticketService.saveAll(List.of(ticket1, ticket2, ticket3,
+//                     ticket4));
+//             System.out.println(tickets);
+
+//             mkAccount account1 = new mkAccount("shkim901101@naver.com", "hashedpassword1", "1234567890", LocalDate.now());
+//             mkAccount account2 = new mkAccount("test2@example.com", "hashedpassword2", "9876543210", LocalDate.now());
+//             mkAccount account3 = new mkAccount("test3@example.com", "hashedpassword3", "5551234567", LocalDate.now());
+
+//             List<mkAccount> accounts = accountService.saveAll(List.of(account1, account2, account3));
+//             System.out.println("\nACCOUNT CHECK : " + accounts);
+
+//             ticket1.setAccount(account1);
+
+
+//             // Test for E-mail Services
+//             mkEvent event4 = new mkEvent("Comedy", "Blag Blah man",LocalDateTime.of(2024, 5, 7, 12, 30), venue2);
+//             eventService.save(event4);
+
+//             ticket3.setAccount(account3);
+
+//             System.out.println("\nTICKETS CHECK : " + tickets);
+//             System.out.println("\nEVENT CHECK : " + event1 + "\n" + event2 + "\n" + event3 + "\n" + event4);
+//             System.out.println("\nVENUE CHECK : " + venue1 + "\n" + venue2 + "\n" + venue3);
+
+//             // Runs when a purchase of a ticket is triggered in management.
+//             orderConfirmationController.confirmOrder(ticket1);
+
+//             // On sale Notification
+//             onSaleNotificationController.sendOnSaleNotificationEmails();
+
+//             // Event Reminder
+//             // eventReminderController.sendEventReminderEmails();
+//             // Event Change/Cancel Notification
+//             eventChangeNotificationController.handleEventChangeNotification(event4, true);
+//             eventChangeNotificationController.handleEventDeletionNotification(event4);
+
+        // };
+//     }
 }
