@@ -1,4 +1,4 @@
-package edu.depaul.ticketselling.marketing.config;
+package edu.depaul.ticketselling.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
