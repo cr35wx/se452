@@ -2,8 +2,10 @@ package edu.depaul.ticketselling.marketing.controller;
 
 import java.util.List;
 
-import edu.depaul.ticketselling.marketing.model.*;
-import edu.depaul.ticketselling.marketing.repository.*;
+import edu.depaul.ticketselling.backend.User;
+import edu.depaul.ticketselling.backend.Event;
+import edu.depaul.ticketselling.backend.IUserRepository;
+import edu.depaul.ticketselling.backend.IEventRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -32,20 +34,18 @@ import edu.depaul.ticketselling.marketing.command.OnSaleNotificationCommand;
 @Component
 public class OnSaleNotificationController {
     private final OnSaleNotificationCommand onSaleNotificationCommand;
-    private final mkAccountRepository accountRepository;
-    private final mkEventRepository eventRepository;
+    private final IUserRepository<User> userRepository;
+    private final IEventRepository eventRepository;
 
     /**
      * Constructor for OnSaleNotificationController.
-     * 
-     * @param onSaleNotificationCommand The command for sending on-sale notification emails.
      */
     @Autowired
-    public OnSaleNotificationController(OnSaleNotificationCommand onSaleNotificationCommand,
-                                        mkAccountRepository accountRepository,
-                                        mkEventRepository eventRepository) {
+    public OnSaleNotificationController(OnSaleNotificationCommand onSaleNotificationCommand, 
+                                        IUserRepository<User> userRepository, 
+                                        IEventRepository eventRepository) {
         this.onSaleNotificationCommand = onSaleNotificationCommand;
-        this.accountRepository = accountRepository;
+        this.userRepository = userRepository;
         this.eventRepository = eventRepository;
     }
 
@@ -56,11 +56,13 @@ public class OnSaleNotificationController {
      */
     @GetMapping("/send-on-sale-notification")
     public String sendOnSaleNotificationEmails() {
-        List<mkAccount> users = accountRepository.findAll();
-        List<mkEvent> events = eventRepository.findAll();
-        for (mkAccount user : users) {
+        List<User> users = (List<User>) userRepository.findAll();
+        List<Event> events = (List<Event>) eventRepository.findAll();
+
+        for (User user : users) {
             onSaleNotificationCommand.execute(user, events);
         }
-        return "On-sale notification emails have been sent successfully.";
+
+        return "On Sale Notification emails sent successfully!";
     }
 }
