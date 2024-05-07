@@ -25,14 +25,11 @@ public abstract class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long userId;
 
-    @Column(nullable = false, length = 256)
-    private String username;
+    @Column(unique = true, nullable = false, length = 254)
+    private String emailAddress;
 
     @Column(nullable = false, length = 256)
     private String password;
-
-    @Column(unique = true, nullable = false, length = 254)
-    private String emailAddress;
 
     @Column(length = 20)
     private String phoneNumber;

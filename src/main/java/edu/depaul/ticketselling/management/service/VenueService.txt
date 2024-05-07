@@ -1,8 +1,8 @@
 package edu.depaul.ticketselling.management.service;
 
 import edu.depaul.ticketselling.management.interfaces.IVenueService;
-import edu.depaul.ticketselling.management.model.Venue;
-import edu.depaul.ticketselling.management.repository.VenueRepository;
+import edu.depaul.ticketselling.backend.Venue;
+import edu.depaul.ticketselling.backend.IVenueRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -12,10 +12,10 @@ import java.util.Optional;
 
 @Service
 public class VenueService implements IVenueService {
-    private final VenueRepository venueRepository;
+    private final IVenueRepository venueRepository;
 
     @Autowired
-    public VenueService(VenueRepository venueRepository) {
+    public VenueService(IVenueRepository venueRepository) {
         this.venueRepository = venueRepository;
     }
 
@@ -24,11 +24,11 @@ public class VenueService implements IVenueService {
     }
 
     public Venue findByAddress(String address) {
-        return venueRepository.findByAddressLine1(address);
+        return venueRepository.findVenueByAddressLine1(address);
     }
 
     public List<Venue> findAll() {
-        return venueRepository.findAll();
+        return venueRepository.findAll().spliterator().;
     }
     
     public Venue save(Venue venue) {

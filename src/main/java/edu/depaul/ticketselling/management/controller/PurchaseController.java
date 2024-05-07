@@ -1,6 +1,6 @@
 package edu.depaul.ticketselling.management.controller;
 
-import edu.depaul.ticketselling.management.model.Purchase;
+import edu.depaul.ticketselling.backend.Purchase;
 import edu.depaul.ticketselling.management.service.PurchaseService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;

@@ -1,49 +1,54 @@
 package edu.depaul.ticketselling.management.service;
 
-import edu.depaul.ticketselling.management.interfaces.IAccountService;
-import edu.depaul.ticketselling.management.model.Account;
-import edu.depaul.ticketselling.management.repository.AccountRepository;
+import java.util.List;
+import java.util.NoSuchElementException;
+import java.util.stream.Collectors;
+import java.util.stream.StreamSupport;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
-import java.util.NoSuchElementException;
+import edu.depaul.ticketselling.backend.IUserRepository;
+import edu.depaul.ticketselling.backend.User;
 
 @Service
-public class AccountService implements IAccountService {
-    private final AccountRepository accountRepository;
+public class AccountService {
+//public class AccountService implements IAccountService {
+    private final IUserRepository<User> accountRepository;
 
     @Autowired
-    public AccountService(AccountRepository accountRepository) {
+    public AccountService(IUserRepository<User> accountRepository) {
         this.accountRepository = accountRepository;
     }
 
-    public Account findByEmailAndPassword(String email, String password) {
-        return accountRepository.findByEmailAndPassword(email, password);
+    public User findByEmailAndPassword(String email, String password) {
+        return accountRepository.findByEmailAddressAndPassword(email, password);
     }
 
-    public List<Account> findAll() {
-        return accountRepository.findAll();
+    public List<User> findAll() {
+        return StreamSupport.stream(accountRepository.findAll().spliterator(), false)
+                .collect(Collectors.toList());
     }
 
-    public Account save(Account account) {
+    public User save(User account) {
         return accountRepository.save(account);
     }
 
-    public List<Account> saveAll(List<Account> accounts) {
-        return accountRepository.saveAll(accounts);
+    public List<User> saveAll(List<User> accounts) {
+        accountRepository.saveAll(accounts);
+        return accounts;
     }
 
     public void deleteAccount(Long id) {
         accountRepository.deleteById(id);
     }
 
-        public Account updateAccount(Long id, Account updatedAccount) {
-        Account existingAccount = accountRepository.findById(id)
+    public User updateAccount(Long id, User updatedAccount) {
+        User existingAccount = accountRepository.findById(id)
                 .orElseThrow(() -> new NoSuchElementException("Account not found with id: " + id));
 
-        if (updatedAccount.getEmail() != null) {
-            existingAccount.setEmail(updatedAccount.getEmail());
+        if (updatedAccount.getEmailAddress() != null) {
+            existingAccount.setEmailAddress(updatedAccount.getEmailAddress());
         }
         if (updatedAccount.getPassword() != null) {
             existingAccount.setPassword(updatedAccount.getPassword());

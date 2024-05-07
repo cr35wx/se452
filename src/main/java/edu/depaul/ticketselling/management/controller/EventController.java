@@ -1,6 +1,6 @@
 package edu.depaul.ticketselling.management.controller;
 
-import edu.depaul.ticketselling.management.model.Event;
+import edu.depaul.ticketselling.backend.Event;
 import edu.depaul.ticketselling.management.service.EventService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -8,6 +8,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.StreamSupport;
 
 @RestController
 @RequestMapping("/events")
@@ -22,7 +24,7 @@ public class EventController {
 
     @GetMapping
     public ResponseEntity<List<Event>> getAllEvents() {
-        List<Event> events = eventService.getAllEvents();
+        List<Event> events = eventService.findAllEvents();
         return ResponseEntity.ok(events);
     }
 
@@ -45,7 +47,8 @@ public class EventController {
 
     @PostMapping("/all")
     public ResponseEntity<List<Event>> createAllEvents(@RequestBody List<Event> events) {
-        List<Event> createdEvents = eventService.saveAll(events);
+        List<Event> createdEvents = StreamSupport.stream(eventService.saveAll(events).spliterator(), false)
+                .collect(Collectors.toList());
         return ResponseEntity.status(HttpStatus.CREATED).body(createdEvents);
     }
 

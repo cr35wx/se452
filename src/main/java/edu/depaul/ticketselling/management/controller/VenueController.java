@@ -1,11 +1,18 @@
 package edu.depaul.ticketselling.management.controller;
 
-import edu.depaul.ticketselling.management.model.Venue;
-import edu.depaul.ticketselling.management.service.VenueService;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
-
 import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import edu.depaul.ticketselling.backend.Venue;
+import edu.depaul.ticketselling.backend.VenueService;
 
 @RestController
 @RequestMapping("/venues")
@@ -20,7 +27,7 @@ public class VenueController {
 
     @GetMapping("/{id}")
     public Venue getVenueById(@PathVariable Long id) {
-        return venueService.findById(id).orElse(null);
+        return venueService.findByVenueId(id);
     }
 
     @GetMapping("/address/{address}")
@@ -34,18 +41,18 @@ public class VenueController {
     }
 
     @PostMapping
-    public Venue addVenue(@RequestBody Venue venue) {
-        return venueService.save(venue);
+    public void addVenue(@RequestBody Venue venue) {
+        venueService.save(venue);
     }
 
-    @PutMapping("/{id}")
-    public Venue updateVenue(@PathVariable Long id, @RequestBody Venue venue) {
-        if (!venueService.findById(id).isPresent()) {
-            return null; // Venue not found
-        }
-        venue.setId(id);
-        return updateVenue(id, venue);
-    }
+//    @PutMapping("/{id}")
+//    public Venue updateVenue(@PathVariable Long id, @RequestBody Venue venue) {
+//        if (!venueService.findByVenueId(id).isPresent()) {
+//            return null; // Venue not found
+//        }
+//        venue.setVenueId(id);
+//        return updateVenue(id, venue);
+//    }
 
     @DeleteMapping("/{id}")
     public void deleteVenueById(@PathVariable Long id) {
