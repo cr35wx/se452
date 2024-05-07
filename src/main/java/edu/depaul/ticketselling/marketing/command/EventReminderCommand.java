@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
  * Upon execution, it constructs the content of the event reminder email based on the provided event
  * information. It then utilizes the EmailService to send the email.
  *
- * @author [Your Name]
+ * @author Suhwan Kim
  */
 @RestController
 @RequestMapping("/email")
