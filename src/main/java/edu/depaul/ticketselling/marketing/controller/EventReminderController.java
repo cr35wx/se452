@@ -25,7 +25,7 @@ import java.util.List;
  * Upon receiving a request to send event reminders, it retrieves all tickets with associated accounts
  * and sends reminder emails to the corresponding email addresses.
  *
- * @author [Your Name]
+ * @author Suhwan Kim
  */
 @RestController
 @RequestMapping("/email")
