@@ -1,7 +1,8 @@
 package edu.depaul.ticketselling.management.service;
 
-import edu.depaul.ticketselling.management.model.Ticket;
-import edu.depaul.ticketselling.management.repository.TicketRepository;
+import edu.depaul.ticketselling.backend.Populate;
+import edu.depaul.ticketselling.backend.Ticket;
+import edu.depaul.ticketselling.backend.ITicketRepository;
 import edu.depaul.ticketselling.management.service.TicketService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -19,7 +20,7 @@ import static org.mockito.Mockito.*;
 public class TicketServiceTest {
 
     @Mock
-    private TicketRepository ticketRepository;
+    private ITicketRepository ticketRepository;
 
     @InjectMocks
     private TicketService ticketService;
@@ -32,7 +33,7 @@ public class TicketServiceTest {
     @Test
     public void testFindAll() {
         // Given
-        List<Ticket> tickets = Arrays.asList(new Ticket(), new Ticket());
+        List<Ticket> tickets = Populate.Tickets();
         when(ticketRepository.findAll()).thenReturn(tickets);
 
         // When

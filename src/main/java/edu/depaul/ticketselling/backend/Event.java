@@ -41,7 +41,7 @@ public class Event {
     @Column(nullable = false, name = "date_time")
     private LocalDateTime dateTime;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "venue_id", nullable = false)
     private Venue venue;
 
@@ -50,6 +50,10 @@ public class Event {
      */
     public String getVenueAddress() {
         return venue.getAddress();
+    }
+
+    public String getVenueName() {
+        return venue.getVenueName();
     }
 
     /**
@@ -72,7 +76,13 @@ public class Event {
 
     @Override
     public String toString() {
-        return String.format("%s%n%s%n%s at %s%n%s%n%s", eventName, artist, getEventDate(), getEventTime(), venue.getVenueName(), getVenueAddress());
+        return String.format("%s%n%s%n%s at %s%n%s%n%s",
+                eventName,
+                artist,
+                getEventDate(),
+                getEventTime(),
+                getVenueName(),
+                getVenueAddress());
     }
 
 }

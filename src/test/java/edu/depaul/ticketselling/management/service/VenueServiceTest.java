@@ -1,25 +1,27 @@
 package edu.depaul.ticketselling.management.service;
 
-import edu.depaul.ticketselling.management.model.Venue;
-import edu.depaul.ticketselling.management.repository.VenueRepository;
-import edu.depaul.ticketselling.management.service.VenueService;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
+
+import java.util.Arrays;
+import java.util.List;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
-import java.util.Arrays;
-import java.util.List;
-import java.util.Optional;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.mockito.Mockito.*;
+import edu.depaul.ticketselling.backend.IVenueRepository;
+import edu.depaul.ticketselling.backend.Venue;
+import edu.depaul.ticketselling.backend.VenueService;
 
 public class VenueServiceTest {
 
     @Mock
-    private VenueRepository venueRepository;
+    private IVenueRepository venueRepository;
 
     @InjectMocks
     private VenueService venueService;

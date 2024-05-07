@@ -25,12 +25,25 @@ public class VenueService {
         return venueRepository.findVenueByVenueName(venueName);
     }
 
+    public Venue findByAddress(String address) {
+        return venueRepository.findVenueByAddressLine1(address);
+    }
+
     public Venue findByVenueId(long venueId) {
         return venueRepository.findById(venueId);
     }
 
-    public void saveAll(List<Venue> events) {
+    public Venue save(Venue venue) {
+        return venueRepository.save(venue);
+    }
+
+    public List<Venue> saveAll(List<Venue> events) {
         venueRepository.saveAll(events);
+        return events;
+    }
+
+    public void deleteById(long id) {
+        venueRepository.deleteById(id);
     }
 
 }

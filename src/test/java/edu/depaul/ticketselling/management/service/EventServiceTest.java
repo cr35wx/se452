@@ -1,7 +1,7 @@
 package edu.depaul.ticketselling.management.service;
 
-import edu.depaul.ticketselling.management.model.Event;
-import edu.depaul.ticketselling.management.repository.EventRepository;
+import edu.depaul.ticketselling.backend.IEventRepository;
+import edu.depaul.ticketselling.backend.Event;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
@@ -10,7 +10,6 @@ import org.mockito.MockitoAnnotations;
 
 import java.util.Arrays;
 import java.util.List;
-import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.*;
@@ -18,7 +17,7 @@ import static org.mockito.Mockito.*;
 public class EventServiceTest {
 
     @Mock
-    private EventRepository eventRepository;
+    private IEventRepository eventRepository;
 
     @InjectMocks
     private EventService eventService;
@@ -35,7 +34,7 @@ public class EventServiceTest {
         when(eventRepository.findAll()).thenReturn(events);
 
         // When
-        List<Event> result = eventService.getAllEvents();
+        List<Event> result = eventService.findAllEvents();
 
         // Then
         assertEquals(events.size(), result.size());

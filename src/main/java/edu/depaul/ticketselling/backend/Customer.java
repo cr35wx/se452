@@ -15,14 +15,14 @@ import lombok.NoArgsConstructor;
 @EqualsAndHashCode(callSuper = true)
 public class Customer extends User {
 
-    public Customer(long id, String username, String password, String email, String phoneNumber, LocalDateTime creationTime) {
-        super(id, username, password, email, phoneNumber, creationTime);
+    public Customer(long id, String email, String password, String phoneNumber, LocalDateTime creationTime) {
+        super(id, email, password, phoneNumber, creationTime);
     }
 
     @Override
     public String toString() {
-        return String.format("User %s, User ID: %d%nEmail: %s%nPhone: %s",
-                getUsername(), getUserId(), getEmailAddress(), getPhoneNumber()
+        return String.format("User ID: %d%nEmail: %s%nPhone: %s",
+                getUserId(), getEmailAddress(), getPhoneNumber()
         );
     }
 

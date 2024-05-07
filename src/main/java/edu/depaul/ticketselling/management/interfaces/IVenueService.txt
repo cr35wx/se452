@@ -1,6 +1,6 @@
 package edu.depaul.ticketselling.management.interfaces;
 
-import edu.depaul.ticketselling.management.model.Venue;
+import edu.depaul.ticketselling.backend.Venue;
 
 import java.util.List;
 import java.util.Optional;

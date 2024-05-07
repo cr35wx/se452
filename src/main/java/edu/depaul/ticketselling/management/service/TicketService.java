@@ -1,27 +1,29 @@
 package edu.depaul.ticketselling.management.service;
 
-import edu.depaul.ticketselling.management.interfaces.ITicketService;
-import edu.depaul.ticketselling.management.model.Event;
-import edu.depaul.ticketselling.management.model.Purchase;
-import edu.depaul.ticketselling.management.model.Ticket;
-import edu.depaul.ticketselling.management.repository.TicketRepository;
+//import edu.depaul.ticketselling.management.interfaces.ITicketService;
+import edu.depaul.ticketselling.backend.Ticket;
+import edu.depaul.ticketselling.backend.ITicketRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
+import java.util.stream.StreamSupport;
 
 @Service
-public class TicketService implements ITicketService {
-    private final TicketRepository ticketRepository;
+public class TicketService {
+//public class TicketService implements ITicketService
+    private final ITicketRepository ticketRepository;
 
     @Autowired
-    public TicketService(TicketRepository ticketRepository) {
+    public TicketService(ITicketRepository ticketRepository) {
         this.ticketRepository = ticketRepository;
     }
 
     public List<Ticket> findAll() {
-        return ticketRepository.findAll();
+        return StreamSupport.stream(ticketRepository.findAll().spliterator(), false)
+                .collect(Collectors.toList());
     }
 
     public Ticket findTicketsByEventId(Long eventId) {
@@ -33,7 +35,8 @@ public class TicketService implements ITicketService {
     }
 
     public List<Ticket> saveAll(List<Ticket> tickets) {
-        return ticketRepository.saveAll(tickets);
+        ticketRepository.saveAll(tickets);
+        return tickets;
     }
 
    public Ticket findById(Long id) {

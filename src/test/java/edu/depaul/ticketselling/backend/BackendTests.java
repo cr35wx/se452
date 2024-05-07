@@ -145,7 +145,6 @@ public class BackendTests {
 
     @Test
     public void UserToStringTest() {
-        String name1 = "wberthouex";
         String pass1 = "hashedpassword";
         String e1 = "wberthou@depaul.edu";
         String p1 = "555-555-5555";
@@ -153,12 +152,11 @@ public class BackendTests {
 
         int id1 = 109558;
 
-        User user = new Customer(id1, name1, pass1, e1, p1, date);
+        User user = new Customer(id1, e1, pass1, p1, date);
         System.out.println(user);
         System.out.println();
 
-        String expected1 = String.format("User %s, User ID: %d%nEmail: %s%nPhone: %s",
-                name1,
+        String expected1 = String.format("User ID: %d%nEmail: %s%nPhone: %s",
                 id1,
                 e1,
                 p1
@@ -166,18 +164,16 @@ public class BackendTests {
 
         assertEquals(expected1, user.toString());
 
-        String name2 = "wberthouex";
         String pass2 = "hashedpassword";
         String e2 = "wberthou@depaul.edu";
         String p2 = "555-555-5555";
 
         int id2 = 109558;
 
-        User admn = new Admin(id2, name2, pass2, e2, p2, date);
+        User admn = new Admin(id2, e2, pass2, p2, date);
         System.out.println(admn);
 
-        String expected2 = String.format("Administrator %s, User ID: %d%nEmail: %s%nPhone: %s",
-                name2,
+        String expected2 = String.format("Administrator, User ID: %d%nEmail: %s%nPhone: %s",
                 id2,
                 e2,
                 p2
