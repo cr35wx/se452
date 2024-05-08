@@ -1,58 +1,77 @@
-package edu.depaul.ticketselling.marketing.controller;
+package edu.depaul.ticketselling.marketing.command;
 
 import edu.depaul.ticketselling.backend.Event;
-import edu.depaul.ticketselling.backend.Purchase;
-import edu.depaul.ticketselling.backend.IPurchaseRepository;
+import edu.depaul.ticketselling.backend.IVenueRepository;
+import edu.depaul.ticketselling.backend.Venue;
+import edu.depaul.ticketselling.marketing.service.Email;
+import edu.depaul.ticketselling.marketing.service.EmailService;
 
-import java.util.List;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import edu.depaul.ticketselling.marketing.command.EventChangeNotificationCommand;
 
 /**
  * [Marketing and communication]
- * This code is Controller of Event cancellations / changes.
+ * This code is Event changes.
  * 
- * This controller is responsible for handling notifications related to event cancellations or changes.
- * It interacts with the EventChangeNotificationCommand to execute the necessary actions.
+ * This command is responsible for executing notifications related to event changes.
+ * It interacts with the EmailService to send out the notifications.
  * 
- * Upon receiving a request to handle event change notifications or deletions, it retrieves the recipient
- * emails associated with the affected event from the account repository. Then, it iterates through the list
- * of recipients, executing the appropriate notification command for each recipient.
+ * Upon execution, it determines whether the event has been updated or deleted based on the provided flag.
+ * It constructs the appropriate notification email content and utilizes the EmailService to send the email.
  * 
  * @author Suhwan Kim
  */
 @RestController
 @RequestMapping("/email")
 @Component
-public class EventChangeNotificationController {
-    private EventChangeNotificationCommand eventChangeNotificationCommand;
-    private IPurchaseRepository purchaseRepository;
+public class EventChangeNotificationCommand {
+    private final EmailService emailService;
+    private final IVenueRepository venueRepository;
 
-    @Autowired
-    public EventChangeNotificationController(EventChangeNotificationCommand eventChangeNotificationCommand, 
-                                            IPurchaseRepository purchaseRepository) {
-        this.eventChangeNotificationCommand = eventChangeNotificationCommand;
-        this.purchaseRepository = purchaseRepository;
+    /**
+     * Constructor for EventChangeNotificationCommand.
+     * 
+     * @param emailService The service responsible for sending emails.
+     */
+    public EventChangeNotificationCommand(EmailService emailService, 
+                                     IVenueRepository venueRepository) {
+        this.emailService = emailService;
+        this.venueRepository = venueRepository;
     }
+
+    /**
+     * Sends a notification for event updates.
+     * 
+     * @param recipient The email address of the recipient.
+     * @param event     The updated event information.
+     * @param isUpdated A flag indicating if the event has been updated.
+     */
+    public void execute(String recipient, Event event) {
+        String subject = "Event Change Notification";
+        StringBuilder bodyBuilder = new StringBuilder();
+        bodyBuilder.append("<html><body>");
+        bodyBuilder.append("<p>Dear customer,</p><br>");
+        bodyBuilder.append("<p>The event you have purchased tickets for has been changed.</p><br>");
+        bodyBuilder.append("<p>Event: ").append(event.getEventName()).append("</p>");
+        bodyBuilder.append("<p>Artist: ").append(event.getArtist()).append("</p>");
+        bodyBuilder.append("<p>Date and Time: ").append(event.getDateTime()).append("</p>");
+        bodyBuilder.append("<p>Please check the updated details.</p><br>");
+
+        Venue venue = venueRepository.findById(event.getVenue().getVenueId());
+        bodyBuilder.append("<p>Venue: ").append(venue.getVenueName()).append("</p>");
+        bodyBuilder.append("<p>Address: ").append(venue.getAddress()).append("</p>");
     
-    @PostMapping("/event-change")
-    public ResponseEntity<String> handleEventChangeNotification(Event updatedEvent, boolean isUpdated) {
-        if (isUpdated) {
-            List<Purchase> purchases = purchaseRepository.findByEvent(updatedEvent);
-            for (Purchase purchase : purchases) {
-                eventChangeNotificationCommand.execute(purchase.getAccount().getEmailAddress(), updatedEvent);
-            }
-            return ResponseEntity.ok("Event change notifications sent successfully!");
-        } else {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Purchased Event is not updated.");
-        }
+        bodyBuilder.append("</body></html>");
+        String body = bodyBuilder.toString();
+        
+        Email email = Email.builder()
+                        .recipient(recipient)
+                        .subject(subject)
+                        .body(body)
+                        .build();
+        
+        emailService.sendEmail(email);
     }
 }
