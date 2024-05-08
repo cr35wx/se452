@@ -1,16 +1,17 @@
 package edu.depaul.ticketselling.marketing.controller;
 
+import edu.depaul.ticketselling.backend.Event;
+import edu.depaul.ticketselling.backend.Purchase;
+import edu.depaul.ticketselling.backend.IPurchaseRepository;
+
 import java.util.List;
 
-import edu.depaul.ticketselling.marketing.model.*;
-import edu.depaul.ticketselling.marketing.repository.*;
-
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import edu.depaul.ticketselling.marketing.command.EventChangeNotificationCommand;
@@ -33,27 +34,25 @@ import edu.depaul.ticketselling.marketing.command.EventChangeNotificationCommand
 @Component
 public class EventChangeNotificationController {
     private EventChangeNotificationCommand eventChangeNotificationCommand;
-    private final mkAccountRepository accountRepository;
+    private IPurchaseRepository purchaseRepository;
 
     @Autowired
-    public EventChangeNotificationController(EventChangeNotificationCommand eventChangeNotificationCommand, mkAccountRepository accountRepository) {
+    public EventChangeNotificationController(EventChangeNotificationCommand eventChangeNotificationCommand, 
+                                            IPurchaseRepository purchaseRepository) {
         this.eventChangeNotificationCommand = eventChangeNotificationCommand;
-        this.accountRepository = accountRepository;
+        this.purchaseRepository = purchaseRepository;
     }
-
+    
     @PostMapping("/event-change")
-    public void handleEventChangeNotification(@RequestBody mkEvent updatedEvent, @RequestParam boolean isUpdated) {
-        List<mkAccount> recipients = accountRepository.findAll();
-        for (mkAccount recipient : recipients) {
-            eventChangeNotificationCommand.sendEventChangeNotification(recipient.getEmail(), updatedEvent, isUpdated);
-        }
-    }
-
-    @PostMapping("/event-deletion")
-    public void handleEventDeletionNotification(@RequestBody mkEvent deletedEvent) {
-        List<mkAccount> recipients = accountRepository.findAll();
-        for (mkAccount recipient : recipients) {
-            eventChangeNotificationCommand.sendEventDeletionNotification(recipient.getEmail(), deletedEvent);
+    public ResponseEntity<String> handleEventChangeNotification(Event updatedEvent, boolean isUpdated) {
+        if (isUpdated) {
+            List<Purchase> purchases = purchaseRepository.findByEvent(updatedEvent);
+            for (Purchase purchase : purchases) {
+                eventChangeNotificationCommand.execute(purchase.getAccount().getEmailAddress(), updatedEvent);
+            }
+            return ResponseEntity.ok("Event change notifications sent successfully!");
+        } else {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Purchased Event is not updated.");
         }
     }
 }
