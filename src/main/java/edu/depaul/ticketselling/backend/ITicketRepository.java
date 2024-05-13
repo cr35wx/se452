@@ -7,4 +7,5 @@ import org.springframework.data.repository.CrudRepository;
 public interface ITicketRepository extends CrudRepository<Ticket, Long> {
     Ticket findByTicketId(long ticketId);
     Ticket findBySeatNumber(int seatNumber);
+    List<Ticket> findByEventEventId(Long eventId);
 }

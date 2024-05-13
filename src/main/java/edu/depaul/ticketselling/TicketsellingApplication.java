@@ -1,25 +1,22 @@
 package edu.depaul.ticketselling;
 
-import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
+// import edu.depaul.ticketselling.marketing.controller.EventChangeNotificationController;
+// import edu.depaul.ticketselling.marketing.controller.EventReminderController;
 
+import edu.depaul.ticketselling.backend.*;
+import edu.depaul.ticketselling.management.service.AccountService;
+import edu.depaul.ticketselling.management.service.EventService;
+import edu.depaul.ticketselling.management.service.TicketService;
+import edu.depaul.ticketselling.marketing.controller.OnSaleNotificationController;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 import org.springframework.transaction.annotation.Transactional;
 
-import edu.depaul.ticketselling.backend.Customer;
-import edu.depaul.ticketselling.backend.Event;
-import edu.depaul.ticketselling.backend.Populate;
-import edu.depaul.ticketselling.backend.Ticket;
-import edu.depaul.ticketselling.backend.User;
-import edu.depaul.ticketselling.backend.Venue;
-import edu.depaul.ticketselling.backend.VenueService;
-import edu.depaul.ticketselling.management.service.AccountService;
-import edu.depaul.ticketselling.management.service.EventService;
-import edu.depaul.ticketselling.management.service.TicketService;
+import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @SpringBootApplication
 public class TicketsellingApplication {
@@ -31,7 +28,8 @@ public class TicketsellingApplication {
     @Bean
     @Transactional
     CommandLineRunner runner(VenueService venueService, EventService eventService,
-                             TicketService ticketService, AccountService accountService) {
+                             TicketService ticketService, AccountService accountService,
+                             OnSaleNotificationController onSaleNotificationController) {
         return args -> {
             // create venues first, then events, then tickets to go to those events, then
             // accounts, and give some tickets to those accounts
@@ -89,7 +87,7 @@ public class TicketsellingApplication {
             ticketService.saveAll(tickets);
             System.out.println(tickets);
 
-            User account1 = new Customer(1, "user1@example.com", "hashedpassword1", "1234567890", LocalDateTime.now());
+            User account1 = new Customer(1, "shkim901101@naver.com", "hashedpassword1", "1234567890", LocalDateTime.now());
             User account2 = new Customer(2, "user2@example.com", "hashedpassword2", "9876543210", LocalDateTime.now());
             User account3 = new Customer(3, "user3@example.com", "hashedpassword3", "5551234567", LocalDateTime.now());
 
@@ -99,7 +97,9 @@ public class TicketsellingApplication {
             System.out.println(accounts);
 
             //ticket1.setAccount(account1);
-
+            
+            // On sale Notification
+            onSaleNotificationController.sendOnSaleNotificationEmails();
         };
     }
 }

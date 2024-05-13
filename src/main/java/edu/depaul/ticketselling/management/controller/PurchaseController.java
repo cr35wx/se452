@@ -8,15 +8,20 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+import edu.depaul.ticketselling.marketing.controller.OrderConfirmationController;
+
 @RestController
 @RequestMapping("/purchases")
 public class PurchaseController {
 
     private final PurchaseService purchaseService;
+    private final OrderConfirmationController orderConfirmation; // Added
 
     @Autowired
-    public PurchaseController(PurchaseService purchaseService) {
+    public PurchaseController(PurchaseService purchaseService, 
+                            OrderConfirmationController orderConfirmation) {
         this.purchaseService = purchaseService;
+        this.orderConfirmation = orderConfirmation; // Added
     }
 
     @GetMapping
@@ -35,9 +40,18 @@ public class PurchaseController {
         }
     }
 
+    /**
+     * Additional functionality for the Order Confirmation Mail Send function.
+     * 
+     * @param orderConfirmation Order Confirmation Mail Send function. 
+     * Added this feature to createPurchase, please check it.
+     * 
+     * @author Suhwan Kim
+     */
     @PostMapping
     public ResponseEntity<Purchase> createPurchase(@RequestBody Purchase purchase) {
         Purchase newPurchase = purchaseService.save(purchase);
+        orderConfirmation.confirmOrder(newPurchase);// Added
         return ResponseEntity.ok(newPurchase);
     }
 
