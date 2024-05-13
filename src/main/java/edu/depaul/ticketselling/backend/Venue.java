@@ -84,7 +84,7 @@ public class Venue {
     }
 
     private String formatAddress() {
-        if (!(addressLine2 == null)) {
+        if (addressLine2 != null) {
             return String.format("%s%n%s%n%s, %s %s", addressLine1, addressLine2, city, state, postalCode);
         }
         return String.format("%s%n%s, %s %s", addressLine1, city, state, postalCode);
