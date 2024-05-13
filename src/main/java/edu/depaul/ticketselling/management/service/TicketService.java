@@ -26,8 +26,8 @@ public class TicketService {
                 .collect(Collectors.toList());
     }
 
-    public Ticket findTicketsByEventId(Long eventId) {
-        return ticketRepository.findById(eventId).orElse(null);
+    public List<Ticket> findTicketsByEventId(Long eventId) {
+        return ticketRepository.findByEventEventId(eventId);
     }
 
     public Ticket save(Ticket ticket) {
@@ -40,8 +40,7 @@ public class TicketService {
     }
 
    public Ticket findById(Long id) {
-        Optional<Ticket> Ticket = ticketRepository.findById(id);
-        return Ticket.orElse(null);
+       return ticketRepository.findById(id).orElse(null);
     }
 
     public void deleteTicket(Long id) {

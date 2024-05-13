@@ -2,38 +2,21 @@ package edu.depaul.ticketselling;
 
 // import edu.depaul.ticketselling.marketing.controller.EventChangeNotificationController;
 // import edu.depaul.ticketselling.marketing.controller.EventReminderController;
-import edu.depaul.ticketselling.marketing.controller.OnSaleNotificationController;
-// import edu.depaul.ticketselling.marketing.controller.OrderConfirmationController;
 
-import edu.depaul.ticketselling.management.model.Account;
-import edu.depaul.ticketselling.management.model.Event;
-import edu.depaul.ticketselling.management.model.Ticket;
-import edu.depaul.ticketselling.management.model.Venue;
+import edu.depaul.ticketselling.backend.*;
 import edu.depaul.ticketselling.management.service.AccountService;
 import edu.depaul.ticketselling.management.service.EventService;
 import edu.depaul.ticketselling.management.service.TicketService;
-import edu.depaul.ticketselling.management.service.VenueService;
-
-import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
-
+import edu.depaul.ticketselling.marketing.controller.OnSaleNotificationController;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 import org.springframework.transaction.annotation.Transactional;
 
-import edu.depaul.ticketselling.backend.Customer;
-import edu.depaul.ticketselling.backend.Event;
-import edu.depaul.ticketselling.backend.Populate;
-import edu.depaul.ticketselling.backend.Ticket;
-import edu.depaul.ticketselling.backend.User;
-import edu.depaul.ticketselling.backend.Venue;
-import edu.depaul.ticketselling.backend.VenueService;
-import edu.depaul.ticketselling.management.service.AccountService;
-import edu.depaul.ticketselling.management.service.EventService;
-import edu.depaul.ticketselling.management.service.TicketService;
+import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @SpringBootApplication
 public class TicketsellingApplication {
