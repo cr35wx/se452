@@ -1,12 +1,12 @@
 package edu.depaul.ticketselling.marketing.command;
 
-import edu.depaul.ticketselling.marketing.model.mkAccount;
-import edu.depaul.ticketselling.marketing.model.mkTicket;
-import edu.depaul.ticketselling.marketing.service.Email;
-import edu.depaul.ticketselling.marketing.service.EmailService;
 import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import edu.depaul.ticketselling.backend.Purchase;
+import edu.depaul.ticketselling.marketing.service.Email;
+import edu.depaul.ticketselling.marketing.service.EmailService;
 
 /**
  * [Marketing and communication]
@@ -41,26 +41,29 @@ public class EventReminderCommand {
      * @param recipient The email address of the recipient.
      * @param event     The event for which the reminder email will be sent.
      */
-    public void execute(mkAccount account, mkTicket ticket) {
-        String recipient = account.getEmail();
-        String subject = "Event Reminder";
+    public void execute(Purchase purchase) {
+        String subject = "Upcoming Event Reminder";
+        String recipient = purchase.getAccount().getEmailAddress();
         StringBuilder bodyBuilder = new StringBuilder();
         bodyBuilder.append("<html><body>");
-        bodyBuilder.append("This is a reminder about a ticket you have purchased:<br/><br/>");
-        bodyBuilder.append("Seat Number: " + ticket.getSeatNumber() + "<br/>");
-        bodyBuilder.append("Price: $" + (ticket.getPrice() / 100.0) + "<br/><br/>");
-        bodyBuilder.append("We hope to see you there!<br/><br/>");
-        bodyBuilder.append("Best regards,<br/>");
-        bodyBuilder.append("TicketSelling Team");
+        bodyBuilder.append("<p>This is a reminder that the event will take place tomorrow.</p><br><br>");
+        bodyBuilder.append("<p>Event: ").append(purchase.getEvent().getEventName()).append("</p>");
+        bodyBuilder.append("<p>Artist: ").append(purchase.getEvent().getArtist()).append("</p>");
+        bodyBuilder.append("<p>Date and Time: ").append(purchase.getEvent().getDateTime()).append("</p>");
+        bodyBuilder.append("<p>Event Venue: ").append(purchase.getEvent().getVenueName()).append("</p>");
+        bodyBuilder.append("<p>Your Seat: ").append(purchase.getTicket().getSeatNumber()).append("</p>");
+        bodyBuilder.append("<br>");
+        bodyBuilder.append("<p>Don't forget to attend!<br><br>Regards,<br>The TicketSelling Team</p>");
         bodyBuilder.append("</body></html>");
+
         String body = bodyBuilder.toString();
-
+        
         Email email = Email.builder()
-                .recipient(recipient)
-                .subject(subject)
-                .body(body)
-                .build();
-
+                        .recipient(recipient)
+                        .subject(subject)
+                        .body(body)
+                        .build();
+        
         emailService.sendEmail(email);
     }
 }
