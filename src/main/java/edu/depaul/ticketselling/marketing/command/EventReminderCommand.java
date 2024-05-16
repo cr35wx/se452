@@ -37,9 +37,6 @@ public class EventReminderCommand {
 
     /**
      * Executes the command to send an event reminder email.
-     *
-     * @param recipient The email address of the recipient.
-     * @param event     The event for which the reminder email will be sent.
      */
     public void execute(Purchase purchase) {
         String subject = "Upcoming Event Reminder";
