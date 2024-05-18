@@ -7,7 +7,8 @@ import edu.depaul.ticketselling.backend.*;
 import edu.depaul.ticketselling.management.service.AccountService;
 import edu.depaul.ticketselling.management.service.EventService;
 import edu.depaul.ticketselling.management.service.TicketService;
-import edu.depaul.ticketselling.marketing.controller.OnSaleNotificationController;
+import edu.depaul.ticketselling.marketing.controller.*;
+
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -27,9 +28,15 @@ public class TicketsellingApplication {
 
     @Bean
     @Transactional
-    CommandLineRunner runner(VenueService venueService, EventService eventService,
-                             TicketService ticketService, AccountService accountService,
-                             OnSaleNotificationController onSaleNotificationController) {
+    CommandLineRunner runner(VenueService venueService, 
+                             EventService eventService, 
+                             TicketService ticketService, 
+                             AccountService accountService,
+                             OnSaleNotificationController onSaleNotificationController, 
+                             OrderConfirmationController orderConfirmationController,
+                             EventReminderController eventReminderController, 
+                             EventChangeNotificationController eventChangeNotificationController,
+                             EventCancelNotificationController eventCancelNotificationController) {
         return args -> {
             // create venues first, then events, then tickets to go to those events, then
             // accounts, and give some tickets to those accounts
@@ -98,8 +105,25 @@ public class TicketsellingApplication {
 
             //ticket1.setAccount(account1);
             
-            // On sale Notification
-            onSaleNotificationController.sendOnSaleNotificationEmails();
+            // Test On sale Notification
+            // onSaleNotificationController.sendOnSaleNotificationEmails();
+            
+            // Test Order Confirmation
+            //     Purchase purchase1 = new Purchase();
+            //     purchase1.setTicket(ticket1);
+            //     purchase1.setEvent(event1);
+            //     purchase1.setVenue(event1.getVenue());
+            //     purchase1.setAccount(account1);
+            //     purchaseService.save(purchase1);
+            
+            // orderConfirmationController.confirmOrder(purchase1);
+
+            // Test Reminder
+            // eventReminderController.sendEventReminderEmails();
+
+            // Event Change/Cancel Notification
+            // eventChangeNotificationController.handleEventChangeNotification(event1, true);
+            // eventCancelNotificationController.handleEventCancellationNotification(event1.getEventId());
         };
     }
 }
