@@ -23,41 +23,34 @@ public class Populate {
         return Tickets();
     }
 
-    protected static void Venues() {
-        Venue.Address a1 = Venue.Address.builder().line1("4000 M-37").city("Interlochen").state("MI").postalCode("49643").build();
-        Venue kresge = Venue.builder().venueName("Kresge Auditorium").address(a1).seatingCapacity(3917).build();
+    public static List<Venue> Venues() {
+        Venue kresge = Venue.builder().venueName("Kresge Auditorium").seatingCapacity(3917).addressLine1("4000 M-37").city("Interlochen").state("MI").postalCode("49643").build();
         VENUES.add(kresge);
 
-        Venue.Address a2 = Venue.Address.builder().line1("220 S Michigan Ave").city("Chicago").state("IL").postalCode("60604").build();
-        Venue orchestraHall = Venue.builder().venueName("Orchestra Hall").address(a2).seatingCapacity(2522).build();
+        Venue orchestraHall = Venue.builder().venueName("Orchestra Hall").seatingCapacity(2522).addressLine1("220 S Michigan Ave").city("Chicago").state("IL").postalCode("60604").build();
         VENUES.add(orchestraHall);
 
-        Venue.Address a3 = Venue.Address.builder().line1("226 W 46th Street").city("New York").state("NY").postalCode("10036").build();
-        Venue rodgersTheatre = Venue.builder().venueName("Richard Rodgers Theatre").address(a3).seatingCapacity(1319).build();
+        Venue rodgersTheatre = Venue.builder().venueName("Richard Rodgers Theatre").seatingCapacity(1319).addressLine1("226 W 46th Street").city("New York").state("NY").postalCode("10036").build();
         VENUES.add(rodgersTheatre);
 
-        Venue.Address a4 = Venue.Address.builder().line1("201 E Randolph Street").city("Chicago").state("IL").postalCode("60601").build();
-        Venue pritzker = Venue.builder().venueName("Pritzker Pavillion").address(a4).seatingCapacity(11000).build();
+        Venue pritzker = Venue.builder().venueName("Pritzker Pavillion").seatingCapacity(11000).addressLine1("201 E Randolph Street").city("Chicago").state("IL").postalCode("60601").build();
         VENUES.add(pritzker);
 
-        Venue.Address a5 = Venue.Address.builder().line1("1 Patriot Place").city("Foxborough").state("MA").postalCode("02035").build();
-        Venue gillette = Venue.builder().venueName("Gillette Stadium").address(a5).seatingCapacity(64628).build();
+        Venue gillette = Venue.builder().venueName("Gillette Stadium").seatingCapacity(64628).addressLine1("1 Patriot Place").city("Foxborough").state("MA").postalCode("02035").build();
         VENUES.add(gillette);
 
-        Venue.Address a6 = Venue.Address.builder().line1("75702 Varner Rd").city("Palm Desert").state("CA").postalCode("92211").build();
-        Venue acrisure = Venue.builder().venueName("Acrisure Arena").address(a6).seatingCapacity(11000).build();
+        Venue acrisure = Venue.builder().venueName("Acrisure Arena").seatingCapacity(11000).addressLine1("75702 Varner Rd").city("Palm Desert").state("CA").postalCode("92211").build();
         VENUES.add(acrisure);
 
-        Venue.Address a7 = Venue.Address.builder().line1("800 Occidental Ave S").city("Seattle").state("WA").postalCode("98134").build();
-        Venue lumen = Venue.builder().venueName("Lumen Field").address(a7).seatingCapacity(68740).build();
+        Venue lumen = Venue.builder().venueName("Lumen Field").seatingCapacity(68740).addressLine1("800 Occidental Ave S").city("Seattle").state("WA").postalCode("98134").build();
         VENUES.add(lumen);
 
-        Venue.Address a8 = Venue.Address.builder().line1("601 F Street NW").city("Washington").state("DC").postalCode("20004").build();
-        Venue capital = Venue.builder().venueName("Capital One Arena").address(a8).seatingCapacity(20000).build();
+        Venue capital = Venue.builder().venueName("Capital One Arena").seatingCapacity(20000).addressLine1("601 F Street NW").city("Washington").state("DC").postalCode("20004").build();
         VENUES.add(capital);
+        return VENUES;
     }
 
-    public static void Events() {
+    public static List<Event> Events() {
         Venues();
         Event e0 = Event.builder()
                 .eventName("Wicked")
@@ -108,7 +101,7 @@ public class Populate {
         EVENTS.add(e5);
 
         Event e6 = Event.builder()
-                .eventName("Chicago Symphony Orchestra")
+                .eventName("Vienna Philharmonic")
                 .artist("Riccardo Muti")
                 .dateTime(LocalDateTime.of(2024, 6, 18, 18, 0))
                 .venue(VENUES.get(ThreadLocalRandom.current().nextInt(0, VENUES.size())))
@@ -148,7 +141,7 @@ public class Populate {
         EVENTS.add(ea);
 
         Event eb = Event.builder()
-                .eventName("Wicked")
+                .eventName("Frozen")
                 .artist("Broadway on Tour")
                 .dateTime(LocalDateTime.of(2024, 4, 20, 20, 0))
                 .venue(VENUES.get(ThreadLocalRandom.current().nextInt(0, VENUES.size())))
@@ -186,6 +179,7 @@ public class Populate {
                 .venue(VENUES.get(ThreadLocalRandom.current().nextInt(0, VENUES.size())))
                 .build();
         EVENTS.add(ef);
+        return EVENTS;
     }
 
     public static List<Ticket> Tickets() {

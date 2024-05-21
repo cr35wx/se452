@@ -1,7 +1,7 @@
 package edu.depaul.ticketselling.management.controller;
 
-import edu.depaul.ticketselling.management.model.Purchase;
-import edu.depaul.ticketselling.management.model.Ticket;
+import edu.depaul.ticketselling.backend.Purchase;
+import edu.depaul.ticketselling.backend.Ticket;
 import edu.depaul.ticketselling.management.service.TicketService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -28,7 +28,7 @@ public class TicketController {
     }
 
     @GetMapping("/{eventId}")
-    public Ticket getTicketsByEventId(@PathVariable Long eventId) {
+    public List<Ticket> getTicketsByEventId(@PathVariable Long eventId) {
         return ticketService.findTicketsByEventId(eventId);
     }
 

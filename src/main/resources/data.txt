@@ -1,3 +1,5 @@
+--Venues data
+--Convert to SQL file at some point
 INSERT INTO venues(name, capacity, address_line1, city, state, postal_code)
     VALUES ('Kresge Auditorium', 3917, '4000 M-37', 'Interlochen', 'MI', '49643');
 

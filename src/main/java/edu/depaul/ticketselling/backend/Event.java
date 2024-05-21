@@ -4,34 +4,58 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 
-import org.springframework.data.relational.core.mapping.Table;
-
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.Table;
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 /**
  * An {@code Event} represents a concert, show, lecture, or other performance that takes place in a {@link Venue}.
  */
 @Data
+@AllArgsConstructor
+@NoArgsConstructor
+@JsonIgnoreProperties({"hibernateLazyInitializer"})
 @Builder
 @Entity
-@Table("events")
+@Table(name = "events")
 public class Event {
-    @Id @GeneratedValue(strategy= GenerationType.AUTO) private long eventId;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private long eventId;
+
+    @Column(nullable = false, length = 50, unique = true)
     private String eventName;
+
+    @Column(nullable = false, length = 50)
     private String artist;
+
+    @Column(nullable = false, name = "date_time")
     private LocalDateTime dateTime;
+
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "venue_id", nullable = false)
     private Venue venue;
 
     /**
      * @return the {@code Address} field of this {@code Event}'s {@code Venue}.
      */
-    public Venue.Address getVenueAddress() {
+    public String getVenueAddress() {
         return venue.getAddress();
+    }
+
+    public String getVenueName() {
+        return venue.getVenueName();
     }
 
     /**
@@ -54,7 +78,13 @@ public class Event {
 
     @Override
     public String toString() {
-        return String.format("%s%n%s%n%s at %s%n%s%n%s", eventName, artist, getEventDate(), getEventTime(), venue.getVenueName(), getVenueAddress());
+        return String.format("%s%n%s%n%s at %s%n%s%n%s",
+                eventName,
+                artist,
+                getEventDate(),
+                getEventTime(),
+                getVenueName(),
+                getVenueAddress());
     }
 
 }

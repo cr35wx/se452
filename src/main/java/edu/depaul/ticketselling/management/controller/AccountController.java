@@ -1,13 +1,23 @@
 package edu.depaul.ticketselling.management.controller;
 
-import edu.depaul.ticketselling.management.model.Account;
-import edu.depaul.ticketselling.management.service.AccountService;
+import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.StreamSupport;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
-import java.util.List;
+import edu.depaul.ticketselling.backend.User;
+import edu.depaul.ticketselling.management.service.AccountService;
 
 @RestController
 @RequestMapping("/accounts")
@@ -20,32 +30,34 @@ public class AccountController {
     }
 
     @GetMapping("/{email}")
-    public ResponseEntity<Account> getAccountByEmail(@PathVariable String email, @PathVariable String password) {
-        Account account = accountService.findByEmailAndPassword(email, password);
+    public ResponseEntity<User> getAccountByEmail(@PathVariable String email, @PathVariable String password) {
+        User account = accountService.findByEmailAndPassword(email, password);
         return ResponseEntity.ok(account);
     }
 
     @GetMapping
-    public ResponseEntity<List<Account>> getAllAccounts() {
-        List<Account> accounts = accountService.findAll();
+    public ResponseEntity<List<User>> getAllAccounts() {
+        List<User> accounts = StreamSupport.stream(accountService.findAll().spliterator(), false)
+                .collect(Collectors.toList());
         return ResponseEntity.ok(accounts);
     }
 
     @PostMapping
-    public ResponseEntity<Account> createAccount(@RequestBody Account account) {
-        Account newAccount = accountService.save(account);
+    public ResponseEntity<User> createAccount(@RequestBody User account) {
+        User newAccount = accountService.save(account);
         return new ResponseEntity<>(newAccount, HttpStatus.CREATED);
     }
 
     @PostMapping("/batch")
-    public ResponseEntity<List<Account>> createAccounts(@RequestBody List<Account> accounts) {
-        List<Account> newAccounts = accountService.saveAll(accounts);
+    public ResponseEntity<List<User>> createAccounts(@RequestBody List<User> accounts) {
+        List<User> newAccounts = StreamSupport.stream(accountService.saveAll(accounts).spliterator(), false)
+                .collect(Collectors.toList());
         return new ResponseEntity<>(newAccounts, HttpStatus.CREATED);
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Account> updateAccount(@PathVariable Long id, @RequestBody Account updatedAccount) {
-        Account updated = accountService.updateAccount(id, updatedAccount);
+    public ResponseEntity<User> updateAccount(@PathVariable Long id, @RequestBody User updatedAccount) {
+        User updated = accountService.updateAccount(id, updatedAccount);
         return ResponseEntity.ok(updated);
     }
 
