@@ -182,6 +182,10 @@ public class Populate {
         return EVENTS;
     }
 
+    /**
+     * Using this method will also generate {@code Events} and {@code Venues}.
+     * @return a list of {@link Ticket} objects
+     */
     public static List<Ticket> Tickets() {
         Events();
 

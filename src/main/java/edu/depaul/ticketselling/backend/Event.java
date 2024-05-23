@@ -48,12 +48,15 @@ public class Event {
     private Venue venue;
 
     /**
-     * @return the {@code Address} field of this {@code Event}'s {@code Venue}.
+     * @return the Address of this {@code Event}'s {@code Venue}.
      */
     public String getVenueAddress() {
         return venue.getAddress();
     }
 
+    /**
+     * @return the name of the {@link Venue} associated with this {@code Event}
+     */
     public String getVenueName() {
         return venue.getVenueName();
     }

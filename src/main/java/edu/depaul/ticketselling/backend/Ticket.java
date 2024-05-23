@@ -64,14 +64,23 @@ public class Ticket {
         return event.getVenue();
     }
 
+    /**
+     * @return the name of the {@link Event} associated with this {@code Ticket}.
+     */
     public String getEventName() {
         return event.getEventName();
     }
 
+    /**
+     * @return the artist associated with the {@link Event}.
+     */
     public String getArtist() {
         return event.getArtist();
     }
 
+    /**
+     * @return the name of the {@link Venue} associated with this {@code Ticket}'s {@link Event}.
+     */
     public String getVenueName() {
         return getEventVenue().getVenueName();
     }
