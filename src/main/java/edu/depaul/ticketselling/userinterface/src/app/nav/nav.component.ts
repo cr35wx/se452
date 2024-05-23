@@ -9,7 +9,7 @@ import { Router } from '@angular/router';
 import { GetStartedComponent } from '../get-started/get-started.component';
 
 @Component({
-  selector: 'app-dashboard',
+  selector: 'app-nav',
   standalone: true,
   imports: [MatSidenavModule,
     MatListModule,
@@ -22,15 +22,15 @@ import { GetStartedComponent } from '../get-started/get-started.component';
     MatButton,
     GetStartedComponent 
   ],
-  templateUrl: './dashboard.component.html',
-  styleUrl: './dashboard.component.css'
+  templateUrl: './nav.component.html',
+  styleUrl: './nav.component.css'
 })
-export class DashboardComponent {
+export class NavComponent {
 
   constructor(private router: Router) {}
 
   showFiller = false;
-  redirectToHome() {
-    this.router.navigate(['/dashboard/home']);
+  redirectToEvents() {
+    this.router.navigate(['/nav/events']);
   }
 }

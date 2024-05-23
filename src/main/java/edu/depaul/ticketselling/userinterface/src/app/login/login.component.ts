@@ -16,7 +16,15 @@ export class LoginComponent {
   constructor(private router: Router) {}
 
   login() {
+    if(!this.username.trim() || !this.password) {
+      console.log('Invalid username or password');
+      alert('Please enter a valid username and password');
+      return;
+    }
     console.log('Login clicked:', this.username, this.password);
-    this.router.navigate(['/dashboard']);
+    this.router.navigate(['/nav', {username: this.username}]);
+  }
+  register() {
+    this.router.navigate(['/register']);
   }
 }

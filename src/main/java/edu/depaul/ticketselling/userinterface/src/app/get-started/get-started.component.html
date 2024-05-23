@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>get-started</title>
+</head>
+<body>
+<div class="flex flex-wrap">
+    <div class="w-full sm:w-8/12 mb-10">
+      <div class="container mx-auto h-full sm:p-10">
+        <nav class="flex px-4 justify-between items-center">
+          <div class="flex items-center text-4xl font-bold">
+            <img class="w-12 h-12 mr-2" src="https://www.svgrepo.com/show/354455/torus.svg" alt="logo">
+            Ticket<span class="text-blue-600">Sphere</span>
+          </div>
+        </nav>        
+        <header class="container px-4 lg:flex mt-10 items-center h-full lg:mt-0">
+          <div class="w-full mb-5">
+            <h2 class="text-3xl font-medium">Welcome, {{ username }}!</h2>
+          </div>
+          <div class="w-full">
+            <h1 class="text-4xl lg:text-6xl font-bold">Find the perfect <span class="text-blue-600">event</span> for you</h1>
+            <div class="w-20 h-2 bg-blue-600 my-4"></div>
+            <p class="text-xl mb-10">Discover events, concerts, seminars, and more, and secure your tickets with ease. Start exploring the world of entertainment today!</p>
+            <button class="bg-blue-500 hover:bg-blue-700 text-white text-2xl font-medium px-4 py-2 rounded shadow" (click)="redirectToEvents()" >Explore Events</button>
+          </div>
+        </header>
+      </div>
+    </div>
+    <img src="https://st.depositphotos.com/1001380/3390/v/950/depositphotos_33900177-stock-illustration-abstract-colorful-background.jpg" alt="Crowd cheering at a concert" class="w-full h-48 object-cover sm:h-screen sm:w-4/12">
+</div>
+</body>
