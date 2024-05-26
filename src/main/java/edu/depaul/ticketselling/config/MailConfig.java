@@ -7,29 +7,23 @@ import org.springframework.mail.javamail.JavaMailSenderImpl;
 
 import java.util.Properties;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.env.Environment;
+import org.springframework.boot.context.properties.ConfigurationProperties;
 
 @Configuration
 public class MailConfig {
-    @Autowired
-    private Environment env;
 
     @Bean
+    @ConfigurationProperties(prefix = "spring.mail")
     public JavaMailSender javaMailSender() {
         JavaMailSenderImpl javaMailSender = new JavaMailSenderImpl();
-        javaMailSender.setHost(env.getProperty("spring.mail.host"));
-        javaMailSender.setPort(Integer.parseInt(env.getProperty("spring.mail.port")));
-        javaMailSender.setUsername(env.getProperty("spring.mail.username"));
-        javaMailSender.setPassword(env.getProperty("spring.mail.password"));
-    
+        
         Properties props = javaMailSender.getJavaMailProperties();
-        props.put("mail.smtp.auth", env.getProperty("spring.mail.properties.mail.smtp.auth"));
-        props.put("mail.smtp.starttls.enable", env.getProperty("spring.mail.properties.mail.smtp.starttls.enable"));
-        props.put("mail.debug", env.getProperty("spring.mail.properties.mail.debug"));
-        props.put("mail.mime.charset", env.getProperty("spring.mail.properties.mail.mime.charset"));
-        props.put("mail.transport.protocol", env.getProperty("spring.mail.properties.mail.transport.protocol"));
-
+        props.put("mail.smtp.auth", true);
+        props.put("mail.smtp.starttls.enable", true);
+        props.put("mail.debug", true);
+        props.put("mail.mime.charset", "UTF-8");
+        props.put("mail.transport.protocol", "smtp");
+        
         return javaMailSender;
     }
 }
