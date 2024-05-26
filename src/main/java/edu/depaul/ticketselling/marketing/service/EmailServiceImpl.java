@@ -3,6 +3,7 @@ package edu.depaul.ticketselling.marketing.service;
 import jakarta.mail.MessagingException;
 import jakarta.mail.internet.MimeMessage;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
@@ -17,10 +18,12 @@ import org.springframework.stereotype.Service;
 @Service
 public class EmailServiceImpl implements EmailService {
     private final JavaMailSender javaMailSender;
+    private final String fromEmail;
 
     @Autowired
-    public EmailServiceImpl(JavaMailSender javaMailSender) {
+    public EmailServiceImpl(JavaMailSender javaMailSender, @Value("${spring.mail.from}") String fromEmail) {
         this.javaMailSender = javaMailSender;
+        this.fromEmail = fromEmail;
     }
 
     @Override
@@ -30,7 +33,7 @@ public class EmailServiceImpl implements EmailService {
         MimeMessageHelper helper;
         try {
             helper = new MimeMessageHelper(mimeMessage, true);
-            helper.setFrom("Ticket-Selling <sh.kim.31.8.55@gmail.com>");
+            helper.setFrom(fromEmail);
             helper.setTo(email.getRecipient());
             helper.setSubject(email.getSubject());
             helper.setText(email.getBody(), true);
