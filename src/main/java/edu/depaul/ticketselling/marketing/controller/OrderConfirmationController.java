@@ -49,7 +49,7 @@ public class OrderConfirmationController {
 
         // Event Data
         String eventName = purchase.getEvent().getEventName();
-        String artistName = purchase.getEvent().getArtist();
+        String artistName = purchase.getEvent().getArtist().getBandName();
         LocalDateTime dateTime = purchase.getEvent().getDateTime();
 
         // Venue Data
