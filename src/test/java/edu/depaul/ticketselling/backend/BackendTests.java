@@ -4,7 +4,10 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
+import edu.depaul.ticketselling.band.Band;
+import edu.depaul.ticketselling.band.BandMember;
 import org.junit.jupiter.api.Test;
 
 public class BackendTests {
@@ -77,7 +80,9 @@ public class BackendTests {
         int cap = 3900;
 
         String eventName = "Hamilton";
-        String artist = "Broadway on Tour";
+        Band artist = Band.builder().bandName("Broadway on Tour").genre("Theatre").build();
+        BandMember broadwayMember = BandMember.builder().memberName("Ensemble").band(artist).build();
+        artist.setMembers(List.of(broadwayMember));
 
         LocalDateTime date = LocalDateTime.of(2024, 8, 21, 21, 30);
         Venue stage = Venue.builder().venueId(100).venueName(venueName).seatingCapacity(cap).addressLine1(addrLine1).city(city).state(state).postalCode(zip).build();
@@ -112,7 +117,9 @@ public class BackendTests {
         int cap = 3900;
 
         String eventName = "Hamilton";
-        String artist = "Broadway on Tour";
+        Band artist = Band.builder().bandName("Broadway on Tour").genre("Theatre").build();
+        BandMember broadwayMember = BandMember.builder().memberName("Ensemble").band(artist).build();
+        artist.setMembers(List.of(broadwayMember));
 
         int seatNo = 21;
         int price = 115295;
