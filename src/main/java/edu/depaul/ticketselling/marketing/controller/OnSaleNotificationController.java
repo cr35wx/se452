@@ -8,6 +8,7 @@ import edu.depaul.ticketselling.backend.IUserRepository;
 import edu.depaul.ticketselling.backend.IEventRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -64,5 +65,10 @@ public class OnSaleNotificationController {
         }
 
         return "On Sale Notification emails sent successfully!";
+    }
+
+    @Scheduled(cron = "0 0 9 * * *")
+    public void scheduleOnSaleNotification() {
+        sendOnSaleNotificationEmails();
     }
 }
