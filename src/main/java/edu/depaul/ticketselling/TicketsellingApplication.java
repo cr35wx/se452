@@ -1,12 +1,11 @@
 package edu.depaul.ticketselling;
 
-// import edu.depaul.ticketselling.marketing.controller.EventChangeNotificationController;
-// import edu.depaul.ticketselling.marketing.controller.EventReminderController;
-
 import edu.depaul.ticketselling.backend.*;
-import edu.depaul.ticketselling.management.service.AccountService;
-import edu.depaul.ticketselling.management.service.EventService;
-import edu.depaul.ticketselling.management.service.TicketService;
+import edu.depaul.ticketselling.band.Band;
+import edu.depaul.ticketselling.band.BandMember;
+import edu.depaul.ticketselling.band.BandMemberService;
+import edu.depaul.ticketselling.band.BandService;
+import edu.depaul.ticketselling.management.service.*;
 import edu.depaul.ticketselling.marketing.controller.*;
 
 import org.springframework.boot.CommandLineRunner;
@@ -28,11 +27,13 @@ public class TicketsellingApplication {
 
     @Bean
     @Transactional
-    CommandLineRunner runner(VenueService venueService, 
-                             EventService eventService, 
-                             TicketService ticketService, 
+    CommandLineRunner runner(VenueService venueService,
+                             EventService eventService,
+                             TicketService ticketService,
                              AccountService accountService,
-                             OnSaleNotificationController onSaleNotificationController, 
+                             BandService bandService,
+                             BandMemberService bandMemberService,
+                             OnSaleNotificationController onSaleNotificationController,
                              OrderConfirmationController orderConfirmationController,
                              EventReminderController eventReminderController, 
                              EventChangeNotificationController eventChangeNotificationController,
@@ -59,20 +60,16 @@ public class TicketsellingApplication {
             List<Ticket> tickets = Populate.Tickets();
             List<Event> events = Populate.EVENTS;
             List<Venue> venues = Populate.VENUES;
+            List<Band> bands = Populate.BANDS;
+            List<BandMember> bandMembers = Populate.BAND_MEMBERS;
 
             venueService.saveAll(venues);
             Venue venue1 = venueService.findByAddress("220 S Michigan Ave");
             Venue venue2 = venueService.findByAddress("201 E Randolph Street");
             Venue venue3 = venueService.findByAddress("800 Occidental Ave S");
 
-//            Event event1 = new Event("Concert", "John Doe Band",
-//                    LocalDateTime.of(2024, 5, 15, 20, 0), venue1);
-//
-//            Event event2 = new Event("Comedy Show", "Laughter Unlimited",
-//                    LocalDateTime.of(2024, 6, 10, 18, 30), venue2);
-//
-//            Event event3 = new Event("Art Exhibition", "Creative Minds Gallery",
-//                    LocalDateTime.of(2024, 7, 5, 10, 0), venue3);
+            bandService.saveAll(bands);
+            bandMemberService.saveAll(bandMembers);
 
             eventService.saveAll(events);
             Event event1 = eventService.findByName("Wicked");

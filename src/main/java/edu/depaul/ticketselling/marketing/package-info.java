@@ -13,9 +13,6 @@
  * @see package edu.depaul.ticketselling.backend.*;
  * @see package edu.depaul.ticketselling.management.service.*;
  * 
- * Files prefixed with mk in the filename are emergency code for standalone implementations of the marketing functionality.
- * Activate them only if not in the official release version, or if there are problems with the backend and management.
- * 
  * Hi-yo Silver!
  * @author Suhwan Kim
  * 

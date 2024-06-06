@@ -2,6 +2,7 @@ package edu.depaul.ticketselling.backend;
 
 import java.time.LocalDateTime;
 
+import edu.depaul.ticketselling.band.Band;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -64,14 +65,23 @@ public class Ticket {
         return event.getVenue();
     }
 
+    /**
+     * @return the name of the {@link Event} associated with this {@code Ticket}.
+     */
     public String getEventName() {
         return event.getEventName();
     }
 
-    public String getArtist() {
+    /**
+     * @return the artist associated with the {@link Event}.
+     */
+    public Band getArtist() {
         return event.getArtist();
     }
 
+    /**
+     * @return the name of the {@link Venue} associated with this {@code Ticket}'s {@link Event}.
+     */
     public String getVenueName() {
         return getEventVenue().getVenueName();
     }

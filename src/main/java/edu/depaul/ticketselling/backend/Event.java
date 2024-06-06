@@ -5,15 +5,8 @@ import java.time.LocalDateTime;
 import java.time.LocalTime;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.FetchType;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.Table;
+import edu.depaul.ticketselling.band.Band;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -37,8 +30,9 @@ public class Event {
     @Column(nullable = false, length = 50, unique = true)
     private String eventName;
 
-    @Column(nullable = false, length = 50)
-    private String artist;
+    @OneToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "artist_id", nullable = false)
+    private Band artist;
 
     @Column(nullable = false, name = "date_time")
     private LocalDateTime dateTime;
@@ -48,12 +42,15 @@ public class Event {
     private Venue venue;
 
     /**
-     * @return the {@code Address} field of this {@code Event}'s {@code Venue}.
+     * @return the Address of this {@code Event}'s {@code Venue}.
      */
     public String getVenueAddress() {
         return venue.getAddress();
     }
 
+    /**
+     * @return the name of the {@link Venue} associated with this {@code Event}
+     */
     public String getVenueName() {
         return venue.getVenueName();
     }
@@ -80,7 +77,7 @@ public class Event {
     public String toString() {
         return String.format("%s%n%s%n%s at %s%n%s%n%s",
                 eventName,
-                artist,
+                artist.toString(),
                 getEventDate(),
                 getEventTime(),
                 getVenueName(),

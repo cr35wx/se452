@@ -30,7 +30,7 @@ CREATE TABLE venues (
 CREATE TABLE events (
     event_id BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
     event_name VARCHAR(50) NOT NULL UNIQUE, -- event name (tour name?)
-    artist VARCHAR(50) NOT NULL,
+    artist_id VARCHAR(50) NOT NULL,
     date_time TIMESTAMP NOT NULL,
     venue_id BIGINT NOT NULL,
     foreign key (venue_id) REFERENCES venues(venue_id)
@@ -57,4 +57,18 @@ CREATE TABLE purchases (
     foreign key (event_id) references events(event_id),
     foreign key (venue_id) references venues(venue_id),
     foreign key (account_id) references accounts(user_id)
+);
+
+CREATE TABLE bands (
+    band_id BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+    band_name VARCHAR(50) NOT NULL,
+    genre VARCHAR(50) NOT NULL,
+    description TEXT
+);
+
+CREATE TABLE band_members (
+    member_id BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+    band_id BIGINT NOT NULL,
+    member_name VARCHAR(50) NOT NULL,
+    foreign key (band_id) references bands(band_id)
 );

@@ -7,21 +7,23 @@ import org.springframework.mail.javamail.JavaMailSenderImpl;
 
 import java.util.Properties;
 
+import org.springframework.boot.context.properties.ConfigurationProperties;
+
 @Configuration
 public class MailConfig {
 
     @Bean
+    @ConfigurationProperties(prefix = "spring.mail")
     public JavaMailSender javaMailSender() {
         JavaMailSenderImpl javaMailSender = new JavaMailSenderImpl();
-        javaMailSender.setHost("smtp.gmail.com");
-        javaMailSender.setPort(587);
-        javaMailSender.setUsername("sh.kim.31.8.55@gmail.com");
-        javaMailSender.setPassword("pdcx wtws nbki cmvu");
-    
+        
         Properties props = javaMailSender.getJavaMailProperties();
         props.put("mail.smtp.auth", true);
         props.put("mail.smtp.starttls.enable", true);
-
+        props.put("mail.debug", true);
+        props.put("mail.mime.charset", "UTF-8");
+        props.put("mail.transport.protocol", "smtp");
+        
         return javaMailSender;
     }
 }
