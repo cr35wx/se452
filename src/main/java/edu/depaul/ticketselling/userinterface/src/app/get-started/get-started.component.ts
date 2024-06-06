@@ -1,6 +1,6 @@
 // get-started.component.ts
 
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
@@ -10,14 +10,16 @@ import { Router, ActivatedRoute } from '@angular/router';
   styleUrls: ['./get-started.component.css']
 })
 export class GetStartedComponent implements OnInit {
-  username: string = '';
+  @Input() username: string = '';
 
   constructor(private route: ActivatedRoute, private router: Router) {}
 
   ngOnInit() {
     this.route.params.subscribe(params => {
+      console.log('params:', params);
       this.username = params['username'];
     });
+    
   }
 
   redirectToEvents() {

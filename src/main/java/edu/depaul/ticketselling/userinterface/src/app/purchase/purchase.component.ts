@@ -39,7 +39,7 @@ export class PurchaseComponent implements OnInit {
 
     this.route.params.subscribe(params => {
       const eventId = +params['id'];
-      this.event = this.eventsService.getEventById(eventId);
+      this.eventsService.getEventById(eventId).subscribe(event => {this.event = event});
       if (this.event) {
         this.purchaseForm.patchValue({
           event: this.event.id,
@@ -67,7 +67,7 @@ export class PurchaseComponent implements OnInit {
   }
 
   updateEventDetails(eventId: number) {
-    this.event = this.eventsService.getEventById(eventId);
+    this.eventsService.getEventById(eventId).subscribe(event => {this.event = event});
     if (this.event) {
         // Ensure we immediately reflect price changes when the event changes
         this.updateTotalCost();

@@ -2,6 +2,7 @@
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { Event } from '../model/event.model'; // Adjust the import path as necessary
+import { HttpClient } from '@angular/common/http';
 
 @Injectable({
     providedIn: 'root'
@@ -64,17 +65,20 @@ export class EventsService {
         }
     ];
 
-    constructor() { }
+    constructor(private http: HttpClient) {
+     }
 
     getEvents(): Observable<Event[]> {
-        return of(this.events);
+        // return of(this.events);
+        return this.http.get<Event[]>('https://66614d1063e6a0189fe92ce5.mockapi.io/api/v1/users');
     }
 
-    getEventById(id: number): Event | undefined {
-        console.log('Looking for event with ID:', id);
-        const foundEvent = this.events.find(event => event.id === id);
-        console.log('Found event:', foundEvent);
-        return foundEvent;
+    getEventById(id: number): Observable<Event> {
+        // console.log('Looking for event with ID:', id);
+        // const foundEvent = this.events.find(event => event.id === id);
+        // console.log('Found event:', foundEvent);
+        // return foundEvent;
+        return this.http.get<Event>('https://66614d1063e6a0189fe92ce5.mockapi.io/api/v1/users/' + id);
     }
 
 }
