@@ -12,6 +12,7 @@ import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
 
 import edu.depaul.ticketselling.marketing.controller.EventChangeNotificationController;
+import edu.depaul.ticketselling.marketing.controller.EventCancelNotificationController;
 
 @RestController
 @RequestMapping("/events")
@@ -19,12 +20,15 @@ public class EventController {
 
     private final EventService eventService;
     private EventChangeNotificationController eventChangeNoti;
+    private EventCancelNotificationController eventCancelNoti; // Added
 
     @Autowired
     public EventController(EventService eventService,
-                        EventChangeNotificationController eventChangeNoti) {
+                        EventChangeNotificationController eventChangeNoti,
+                        EventCancelNotificationController eventCancelNoti) {
         this.eventService = eventService;
         this.eventChangeNoti = eventChangeNoti; // Added
+        this.eventCancelNoti = eventCancelNoti; // Added
     }
 
     @GetMapping
@@ -64,7 +68,7 @@ public class EventController {
     }
 
     /**
-     * Additional functionality for the Event Change Notification Mail Send function.
+     * Additional functionality for the Event Change and Cancel Notification Mail Send function.
      * 
      * @param eventChangeNoti Event Change Notification Mail Send function. 
      * Added this feature to updateEvent, please check it.
@@ -85,6 +89,7 @@ public class EventController {
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteEvent(@PathVariable Long id) {
         eventService.deleteById(id);
+        eventCancelNoti.handleEventCancellationNotification(id); // Added
         return ResponseEntity.noContent().build();
     }
 }

@@ -12,6 +12,7 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
+import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
@@ -19,6 +20,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @SpringBootApplication
+@EnableScheduling
 public class TicketsellingApplication {
 
     public static void main(String[] args) {
