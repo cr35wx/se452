@@ -13,7 +13,8 @@ import org.junit.jupiter.api.Test;
 public class BackendTests {
 
     @Test
-    public void VenueToStringTest() {
+    public void VenueTest() {
+        // one line address
         String addrLine11 = "226 W 46th Street";
         String city1 = "New York";
         String state1 = "NY";
@@ -40,6 +41,10 @@ public class BackendTests {
         assertEquals(expected1, stage1.toString());
         assertNotEquals("fail", stage1.toString());
 
+        // capacity
+        assertEquals(cap1, stage1.getSeatingCapacity());
+
+        // two line address
         String addrLine12 = "226 W 46th Street";
         String addrLine2 = "Lot 3";
         String city2 = "New York";
@@ -58,7 +63,7 @@ public class BackendTests {
 
         String expected2 = String.format("%s%n%s%nVenue ID: %d, Seating capacity: %d",
                 venue2,
-                addr2.toString(),
+                addr2,
                 id2,
                 cap2
         );
@@ -70,7 +75,7 @@ public class BackendTests {
     }
 
     @Test
-    public void EventToStringTest() {
+    public void EventTest() {
         String addrLine1 = "226 W 46th Street";
         String city = "New York";
         String state = "NY";
@@ -104,10 +109,17 @@ public class BackendTests {
 
         assertEquals(expected, ev.toString());
         assertNotEquals("fail", ev.toString());
+
+        // date
+        assertEquals(date, ev.getDateTime());
+        // event name
+        assertEquals("Hamilton", ev.getEventName());
+        // artist
+        assertEquals("Broadway on Tour", ev.getArtist().getBandName());
     }
 
     @Test
-    public void TicketToStringTest() {
+    public void TicketTest() {
         String addrLine1 = "226 W 46th Street";
         String city = "New York";
         String state = "NY";
@@ -148,10 +160,16 @@ public class BackendTests {
 
         assertEquals(expected, t.toString());
         assertNotEquals("fail", t.toString());
+
+        // seat number
+        assertEquals(seatNo, t.getSeatNumber());
+        // price
+        assertEquals(price, t.getPrice());
+        assertNotEquals(1152.95, t.getPrice());
     }
 
     @Test
-    public void UserToStringTest() {
+    public void UserTest() {
         String pass1 = "hashedpassword";
         String e1 = "wberthou@depaul.edu";
         String p1 = "555-555-5555";
@@ -189,6 +207,19 @@ public class BackendTests {
         assertEquals(expected2, admn.toString());
 
         assertNotEquals(user, admn);
+
+    }
+
+    @Test
+    public void bandTest() {
+        String name = "Broadway on Tour";
+        String genre = "Theatre";
+
+        Band artist = Band.builder().bandName(name).genre(genre).build();
+
+        assertEquals("Broadway on Tour", artist.getBandName());
+        assertEquals(genre, artist.getGenre());
+
     }
 
 }

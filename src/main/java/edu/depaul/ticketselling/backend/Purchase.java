@@ -12,7 +12,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 /**
- * Represents a User's {@code Purchase} or the item(s) in their "shopping cart"
+ * Represents a User's {@code Purchase} or, in other words, the item(s) in their "shopping cart"
  */
 @Data
 @NoArgsConstructor
